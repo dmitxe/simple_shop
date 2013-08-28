@@ -1,0 +1,2 @@
+shop_site:
+    resource: "@ShopSiteBundle/Resources/config/routing.yml"

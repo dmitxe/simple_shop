@@ -1,0 +1,15 @@
+shop_site_index:
+    path: /
+    defaults: { _controller: ShopSiteBundle:Page:index }
+
+shop_site_admin:
+    path: /admin/
+    defaults: { _controller: ShopSiteBundle:Admin:index }
+
+shop_site_about:
+    path: /about/
+    defaults: { _controller: ShopSiteBundle:Page:about }
+
+shop_site_contacts:
+    path: /contacts/
+    defaults: { _controller: ShopSiteBundle:Page:contacts }

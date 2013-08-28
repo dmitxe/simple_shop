@@ -63,3 +63,7 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+knp_menu:
+    twig:
+        template: ShopSiteBundle:Menu:knp_menu.html.twig

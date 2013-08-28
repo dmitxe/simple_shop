@@ -23,6 +23,8 @@
         "sensio/distribution-bundle": "2.3.*",
         "sensio/generator-bundle": "2.3.*",
         "incenteev/composer-parameter-handler": "~2.0",
+        "knplabs/knp-gaufrette-bundle" : "v0.1.4",
+        "knplabs/knp-menu-bundle": "v2.0.0-alpha1",
         "smart-core/html-bundle": "dev-master"
     },
     "scripts": {

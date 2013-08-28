@@ -1,0 +1,11 @@
+parameters:
+#    dmitxe_site.example.class: Dmitxe\SiteBundle\Example
+
+services:
+    # Menu selected items
+    shop_site.menu.voter.request:
+        class: Shop\SiteBundle\Menu\RequestVoter
+        arguments:
+            - @service_container
+        tags:
+            - { name: knp_menu.voter }
