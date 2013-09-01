@@ -35,13 +35,6 @@ class Attribute
      */
     private $type_value;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_table", type="smallint")
-     */
-    private $id_table;
-
 
     /**
      * Get id
@@ -97,28 +90,5 @@ class Attribute
     public function getTypeValue()
     {
         return $this->type_value;
-    }
-
-    /**
-     * Set id_table
-     *
-     * @param integer $idTable
-     * @return Attribute
-     */
-    public function setIdTable($idTable)
-    {
-        $this->id_table = $idTable;
-    
-        return $this;
-    }
-
-    /**
-     * Get id_table
-     *
-     * @return integer 
-     */
-    public function getIdTable()
-    {
-        return $this->id_table;
     }
 }

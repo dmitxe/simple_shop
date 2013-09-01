@@ -1,0 +1,6 @@
+{% for attribute in attributes %}
+<p> <a href="{{ path('shop_store_attribute_edit', {'id': attribute.id}) }}">
+        Редактировать атрибут {{ attribute.name }}
+    </a>
+</p>
+{% endfor %}
