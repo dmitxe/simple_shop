@@ -1,0 +1,343 @@
+{% extends '::base.html.twig' %}
+
+{% set site_url = 'http://' ~ app.request.host ~ app.request.getBaseURL() %}
+{% set path_to_css = site_url ~ '/themes/tea/css/' %}
+{% set path_to_js = site_url ~ '/themes/tea/js/' %}
+{% set path_to_images = site_url ~ '/themes/tea/images/' %}
+
+{% block html_head_title %} Золотой Иван-чай {% endblock html_head_title %}
+
+{% block html_head_meta %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock html_head_meta %}
+
+{% block html_head_links %}
+    <link rel="icon" type="image/x-icon" href="{{ asset(path_to_images ~ 'favicon.ico') }}" />
+    <link href="{{ asset(path_to_css ~ 'template.css') }}" rel="stylesheet">
+    <link href="{{ asset(path_to_css ~ 'grey.css') }}" rel="stylesheet">
+{% endblock html_head_links %}
+
+{% block html_head_scripts %}
+    <script src="{{ asset('assets/jquery/1.10.2/jquery.min.js') }}"></script>
+    <script src="{{ asset(path_to_js ~ 'verysimpleslideshow.js') }}"></script>
+{% endblock html_head_scripts %}
+
+
+{% block body %}
+<body>
+    <div id="allwrap" class="gainlayout" style="width:980px;">
+{#  @todo подключить флаш
+    <div style="position: absolute;">
+        <object style="visibility: visible;" id="main-flash" data="%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_files/main.swf" type="application/x-shockwave-flash" height="250px" width="980px"><param value="transparent" name="wmode"><param value="scale" name="scale"><param value="always" name="allowScriptAccess"><param value="#cb9b22" name="bgcolor"><param value="button=" name="flashvars"></object>
+    </div>
+#}
+        <div id="header" class="gainlayout">
+            <div id="logo" class="gainlayout">
+                <a href="{{ site_url }}" title=""></a>
+                <h3></h3>
+                <a href="{{ site_url }}" title="Золотой Иван-Чай" id="block-logo"></a>
+            </div>
+            <div id="headerright" class="gainlayout">
+                <div id="hsocial" class="gainlayout">
+                    <div id="search" class="gainlayout">
+                        <div class="moduletable">
+                            <h3>Корзина</h3>
+                            <div id="jshop_module_cart">
+                                <table width="100%">
+                                    <tbody>
+                                    <tr>
+                                        <td><span id="jshop_quantity_products">0</span>&nbsp;Товары </td>
+                                        <td>-</td>
+                                        <td><span id="jshop_summ_product">0.00 RUB</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" align="right">
+                                            <a style="margin-right: 6px;" href="http://zolotoi-chai.ru/produkty/wishlist/">Пожелания</a>
+                                            <a href="http://zolotoi-chai.ru/produkty/cart/view.html">В корзину</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+            </div>
+            <div class="clr"></div>
+        </div>
+
+        <div style="background: #f7f7f7;">
+            <div id="topmenuwrap" class="gainlayout">
+                <div id="topmenu" class="gainlayout">
+                    <div class="moduletable">
+                        <h3>Верхнее меню</h3>
+                        <ul class="nav menu">
+                            <li class="item-101 current active"><a href="http://zolotoi-chai.ru/">Главная</a></li>
+                            <li class="item-124"><a href="http://zolotoi-chai.ru/about-us.html">О нас</a></li>
+                            <li class="item-113"><a href="http://zolotoi-chai.ru/produkty.html">Продукция</a></li>
+                            <li class="item-134 deeper parent"><a href="http://zolotoi-chai.ru/galery.html">Галерея</a>
+                                <ul class="nav-child unstyled small">
+                                    <li class="item-121"><a href="http://zolotoi-chai.ru/galery/photoalbums.html">Фото-материалы</a></li>
+                                    <li class="item-123"><a href="http://zolotoi-chai.ru/galery/video.html">Видео-материалы</a></li>
+                                </ul>
+                            </li>
+                            <li class="item-125"><a href="http://zolotoi-chai.ru/shipping.html">Доставка</a></li>
+                            <li class="item-126"><a href="http://zolotoi-chai.ru/optovikam.html">Оптовикам</a></li>
+                            <li class="item-127"><a href="http://zolotoi-chai.ru/contacts.html">Контакты</a></li>
+                            <li class="item-132"><a href="http://zolotoi-chai.ru/license.html">Лицензия</a></li>
+                        </ul>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <div class="clr"></div>
+            </div>
+             {# Warning! Не работает     {% include '_top_menu.html.twig' %} #}
+        </div>
+
+        <div id="wrap" class="gainlayout">
+            <div id="slideshow-container">
+                <img style="opacity: 0;" src="{{ path_to_images ~ '/sampledata/1.jpg' }}" alt="1.jpg" />
+                <img style="opacity: 0;" src="{{ path_to_images ~ 'sampledata/2.gif' }}" alt="2.gif" />
+                <img style="opacity: 0;" src="{{ path_to_images ~ 'sampledata/3.gif' }}" alt="3.gif">
+                <img style="opacity: 1;" src="{{ path_to_images ~ 'sampledata/4.gif' }}" alt="4.gif">
+                <img style="opacity: 0;" src="{{ path_to_images ~ 'sampledata/5.gif' }}" alt="5.gif">
+                <div style="z-index: -1;" id="slcontrol"> <a id="slnext" href="#"></a><a id="slprev" href="#"></a></div>
+            </div>
+            <div id="pathway" class="gainlayout">
+                <div class="breadcrumbs"> <span class="showHere">Вы здесь: </span><span>Главная</span></div>
+                <div class="clr"></div>
+            </div>
+
+            <div id="cbody" class="gainlayout">
+                <div id="sidebar" style="width:190px;">
+                    <div class="moduletable_menu">
+                        <h3>Философия чая</h3>
+                        <ul class="nav menu">
+                            <li class="item-112"><a href="http://zolotoi-chai.ru/history.html">История чая</a></li><li class="item-133"><a href="http://zolotoi-chai.ru/ivan-chajnyj-sbor.html">Иван-чайный сбор</a></li><li class="item-136"><a href="http://zolotoi-chai.ru/pochemu-chaj-iz-kipreya-nuzhno-pit-ezhednevno.html">Почему чай из кипрея нужно пить ежедневно?</a></li></ul>
+                    </div>
+                    <div class="moduletable_menu">
+                        <h3>Оплата</h3>
+                        <ul class="latestnews_menu">
+                            <li>
+                                <a href="http://zolotoi-chai.ru/11-payment/16-skidki.html">
+                                    Скидки</a>
+                            </li>
+                            <li>
+                                <a href="http://zolotoi-chai.ru/11-payment/10-instruktsiya-po-oplate.html">
+                                    Инструкция по оплате</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="moduletable">
+                        <h3>Новости</h3>
+                        <ul class="latestnews">
+                            <li>
+                                <a href="http://zolotoi-chai.ru/10-news/15-o-kofeine.html">
+                                    О кофеине</a>
+                            </li>
+                            <li>
+                                <a href="http://zolotoi-chai.ru/10-news/14-kolichestvo-produktsii.html">
+                                    Количество продукции</a>
+                            </li>
+                            <li>
+                                <a href="http://zolotoi-chai.ru/10-news/12-pervyj-majskij-ivan-chaj.html">
+                                    Первый майский иван-чай</a>
+                            </li>
+                            <li>
+                                <a href="http://zolotoi-chai.ru/10-news/11-novost-2.html">
+                                    От сердца к сердцу</a>
+                            </li>
+                            <li>
+                                <a href="http://zolotoi-chai.ru/10-news/6-novost-pervaya.html">
+                                    Живой Иван-чай</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="moduletable">
+                        <h3>Категории товара</h3>
+                        <div class="jshop_menu_level_0">
+                            <a href="http://zolotoi-chai.ru/produkty/chaj.html">Чай </a>
+                        </div>
+                    </div>
+    {# @todo Подключить виджет
+                    <div class="moduletable">
+                        <h3>Мы Вконтакте</h3>
+
+                        <!-- VK Widget -->
+                        <div style="height: 290px; width: 200px; background: none repeat scroll 0% 0% transparent;" id="jlvkgroup51227628"><iframe style="overflow: hidden; height: 290px;" id="vkwidget1" src="%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_files/widget_community.htm" name="fXD512fb" frameborder="0" height="200" scrolling="no" width="200"></iframe></div>
+                        <script type="text/javascript">
+                            VK.Widgets.Group("jlvkgroup51227628", {mode: 0, wide: 0, width: "200", height: "290"}, 51227628);
+                        </script>
+                        <!--<div style="text-align: right;">
+                            <a href="http://joomline.ru/rasshirenija/moduli/modul-jlvkgroup.html" target="_blank" style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; "></a>
+                        </div>-->		</div>
+    #}
+                    <div class="moduletable">
+                        <h3>Вход на сайт</h3>
+                        {% if is_granted('ROLE_USER') %}
+                            <span>Здравствуйте, <strong>{{ app.user.username }}</strong>!</span>
+                            <a href="{{ path('fos_user_profile_show') }}">Редактировать профиль</a> <br />
+                            <a href="{{ path('fos_user_security_logout') }}">Выход</a>
+                        {% else %}
+                            {{ render(controller('ShopUserBundle:Security:headerLogin')) }}
+                        {% endif %}
+                    </div>
+                    <div class="moduletable">
+                        <h3>Способы оплаты</h3>
+
+
+                        <div class="custom">
+                            <!-- begin WebMoney Transfer : accept label -->
+                            <p><a href="http://www.megastock.ru/" target="_blank"><img ilo-full-src="http://zolotoi-chai.ru/images/logo_webmoney.png" src="%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_files/logo_webmoney.png" alt="www.megastock.ru" style="margin-bottom: 14px;" height="31" width="88"></a> <a href="https://money.mail.ru/" target="_blank"><img ilo-full-src="http://zolotoi-chai.ru/images/payments/mail.jpg" src="%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_files/mail.jpg" alt="money.mail.ru" height="49" width="90"></a> <a href="http://www.elecsnet.ru/" target="_blank"><img ilo-full-src="http://zolotoi-chai.ru/images/payments/eleksnet.jpg" src="%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_files/eleksnet.jpg" alt="www.elecsnet.ru" height="49" width="90"></a> <a href="https://www.qiwi.ru/" target="_blank"><img ilo-full-src="http://zolotoi-chai.ru/images/payments/qiwi.jpg" src="%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_files/qiwi.jpg" alt="www.qiwi.ru" height="49" width="90"></a> <a href="http://euroset.ru/" target="_blank"><img ilo-full-src="http://zolotoi-chai.ru/images/payments/euronet.jpg" src="%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_files/euronet.jpg" alt="euroset.ru" height="48" width="84"></a> <a href="https://money.yandex.ru/" target="_blank"><img ilo-full-src="http://zolotoi-chai.ru/images/payments/yandex.jpg" src="%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_files/yandex.jpg" alt="money.yandex.ru" height="49" width="90"></a> <span><img ilo-full-src="http://zolotoi-chai.ru/images/payments/telephon.jpg" src="%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_files/telephon.jpg" alt="телефон" height="49" width="90"></span> <a href="http://www.bankuralsib.ru/" target="_blank"><img ilo-full-src="http://zolotoi-chai.ru/images/payments/uralsib.jpg" src="%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_files/uralsib.jpg" alt="www.bankuralsib.ru" height="49" width="90"></a> <a href="http://www.svyaznoybank.ru/" target="_blank"><img ilo-full-src="http://zolotoi-chai.ru/images/payments/svasnoi.png" src="%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_files/svasnoi.png" alt="www.svyaznoybank.ru" height="49" width="90"></a></p>
+                            <!-- end WebMoney Transfer : accept label --></div>
+                    </div>
+                </div>
+                <div id="content60" style="width:670px;">
+                    <div id="content" class="gainlayout">
+                        <div id="system-message-container">
+                            <div id="system-message"> </div>
+                        </div>
+
+                        <div class="blog-featured">
+                            <h1>Главная</h1>
+                            <div class="items-leading">
+                                <div class="leading-0">
+                                    <ul class="actions">
+                                        <li class="print-icon">
+                                            <a href="http://zolotoi-chai.ru/ivan-chajnyj-sbor.html?tmpl=component&amp;print=1&amp;page=" title="Печать" onclick="window.open(this.href,'win2','status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no'); return false;" rel="nofollow"><span class="icon-print"></span>&nbsp;Печать&nbsp;</a>		</li>
+                                        <li class="email-icon">
+                                            <a href="http://zolotoi-chai.ru/component/mailto/?tmpl=component&amp;template=eco-tea&amp;link=3a6740f4977e1ef57add3b1516f855bc223dfa82" title="E-mail" onclick="window.open(this.href,'win2','width=400,height=350,menubar=yes,resizable=yes'); return false;"><span class="icon-envelope"></span> E-mail</a>		</li>
+
+                                    </ul>
+
+
+                                    <h2 class="contentheading">
+                                        <a href="http://zolotoi-chai.ru/ivan-chajnyj-sbor.html">
+                                            Иван-чайный сбор</a>
+                                    </h2>
+
+
+
+
+
+                                    <dl class="article-info">
+                                        <dt class="article-info-term">Подробности</dt>
+                                        <dd class="category-name">
+                                            Категория: <a href="http://zolotoi-chai.ru/8-articles.html">Статьи</a>						</dd>
+                                        <dd class="published">
+                                            Опубликовано: 14.06.2013 08:00		</dd>
+                                    </dl>
+
+
+                                    <p><span style="font-family: arial,helvetica,sans-serif; font-size: small;">Установлено,
+     что в чистом виде, без добавок, иван-чай способствует укреплению
+    иммунитета, оказывает благотворное влияние на работу эндокринной
+    системы, снимает головную боль, приводит в норму артериальное давление и
+     даже препятствует образованию опухолей.</span></p>
+
+                                    <p class="readmore">
+                                        <a href="http://zolotoi-chai.ru/ivan-chajnyj-sbor.html">
+                                            Подробнее: Иван-чайный сбор</a>
+                                    </p>
+
+
+                                    <div class="item-separator"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clr"></div>
+             </div>
+            <!--end of wrap-->
+        </div>
+
+<!--end of allwrap-->
+    </div>
+    <div id="footerwrap" class="gainlayout" style="width:980px;">
+        <div id="footer" class="gainlayout">
+        </div>
+        <div id="copyright"> © 2013 Золотой Иван-Чай</div>
+    </div>
+</body>
+    {#
+      <div id="page" class="container">
+           <div class="navbar navbar-inverse navbar-fixed-top">
+               <div class="navbar-inner">
+                   <div class="container">
+                       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                           <span class="icon-bar"></span>
+                           <span class="icon-bar"></span>
+                           <span class="icon-bar"></span>
+                       </a>
+                       <a class="brand" href="{{ path('shop_site_index') }}">Золотой Чай</a>
+                       <div class="nav-collapse">
+
+                           {{ knp_menu_render('ShopSiteBundle:SiteMenu:main', {
+                               'currentClass': 'active',
+                               'clear_matcher': false,
+                           }) }}
+
+                           <ul class="nav pull-right">
+                               {% if is_granted('ROLE_USER') %}
+                                   <li class="divider-vertical"></li>
+                                   <li class="dropdown">
+                                       <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user icon-white"></i>
+                                           &nbsp;{{ app.user.username }} <b class="caret"></b></a>
+                                       <ul class="dropdown-menu">
+                                           <li><a href="{{ path('fos_user_profile_show') }}"><i class="icon-cog"></i> Мой профиль</a></li>
+                                           <li class="divider"></li>
+                                           <li><a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i> Выход</a></li>
+                                       </ul>
+                                   </li>
+                               {% else %}
+                                   <li><a href="{{ path('fos_user_registration_register') }}">Зарегистрироваться</a></li>
+                                   <li class="dropdown">
+                                       <a id="login-dropdown" class="dropdown-toggle" href="#" data-toggle="dropdown">Войти <strong class="caret"></strong></a>
+                                       <div class="dropdown-menu" style="padding: 16px; padding-bottom: 0px;">
+
+                                           {{ render(controller('ShopUserBundle:Security:headerLogin')) }}
+
+                                       </div>
+                                   </li>
+                               {% endif %}
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+           </div>
+
+           <div class="row">
+               <div class="span12">
+                   <div class="breadcrumb">
+                       {% if breadcrumbs != '' %}
+                           {% set breadcrumbs = '<a href="' ~ path('shop_site_index') ~ '">Главная</a> » ' ~ breadcrumbs %}
+                       {% endif %}
+                       {% block breadcrumb %}
+                           {{ breadcrumbs|raw }}
+                       {% endblock breadcrumb %}
+                   </div>
+               </div>
+           </div>
+
+           <div class="row">
+               {% block sidebar %}
+               {% endblock sidebar %}
+
+               {% block content %}
+               {% endblock content %}
+           </div>
+
+           <div class="navbar navbar-fixed-bottom navbar">
+               <div class="navbar-inner text-center">
+                   <span class="navbar-text">SimpleShop &copy; 2013</span>
+               </div>
+           </div>
+       </div>
+   #}
+{% endblock body %}
+
+{% block body_js %}{% endblock body_js %}

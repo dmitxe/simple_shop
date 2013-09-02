@@ -82,6 +82,10 @@ fos_user:
     group:
         group_class: Shop\UserBundle\Entity\Group
 
+liip_theme:
+    themes: ['simple', 'tea']
+    active_theme: 'tea'
+
 services:
     twig_extension.intl:
         class: Twig_Extensions_Extension_Intl

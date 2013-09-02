@@ -7,3 +7,7 @@ shop_site:
 
 shop_user:
     resource: "@ShopUserBundle/Resources/config/routing.yml"
+
+liip_theme:
+    resource: "@LiipThemeBundle/Resources/config/routing.xml"
+    prefix: /theme

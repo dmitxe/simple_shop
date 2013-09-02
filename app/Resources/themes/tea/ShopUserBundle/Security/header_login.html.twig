@@ -1,0 +1,42 @@
+<form method="post" action="{{ path("fos_user_security_check") }}" accept-charset="UTF-8" id="form-login" class="form-inline">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <p id="form-login-username">
+        <label for="modlgn_username">Логин</label>
+        <input type="text" placeholder="Ваш логин" id="modlgn_username" name="_username"  size="18"  />
+     </p>
+    <p id="form-login-password">
+        <label for="modlgn_passwd">Пароль</label>
+        <input type="password" placeholder="Пароль" id="modlgn_passwd" name="_password"  size="18"  />
+    </p>
+    <div id="form-login-remember" class="control-group checkbox">
+        <label class="control-label" for="modlgn-remember">Запомнить меня</label>
+        <input  id="modlgn-remember" class="inputbox" type="checkbox" name="remember-me" value="1" />
+    </div>
+    <input class="btn btn-primary btn-block" type="submit" id="sign-in" name="_submit" value="Войти">
+
+    <div>
+        <a href="http://zolotoi-chai.ru/component/users/?view=reset">Забыли пароль?</a>
+    </div>
+    <div>
+        <a href="{{ path('fos_user_registration_register') }}">Зарегистрироваться</a>
+    </div>
+
+</form>
+
+{#
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    <img src="/img/login_nail.png" alt="" />
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+    <label for="username">Логин</label>
+    <br />
+
+    <input type="password" id="password" name="_password" required="required" />
+    <label for="password">Пароль</label>
+    <br />
+
+    <input type="submit" id="_submit" name="_submit" value="Войти" />
+    <a href="/password/request">Восстановить пароль</a>
+</form>
+#}

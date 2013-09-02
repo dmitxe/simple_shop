@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new SmartCore\Bundle\HtmlBundle\HtmlBundle(),
+            new Liip\ThemeBundle\LiipThemeBundle(),
 
             new Shop\UserBundle\ShopUserBundle(),
             new Shop\SiteBundle\ShopSiteBundle(),

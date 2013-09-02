@@ -2,9 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block html_head_links %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <title>{% block html_head_title %}Welcome!{% endblock %}</title>
+        {% block html_head_links %}
+            <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% endblock %}
         {% block html_head_scripts %}
  <!--           <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"  type="text/javascript"></script>-->
         {% endblock %}

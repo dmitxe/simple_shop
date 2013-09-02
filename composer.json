@@ -27,7 +27,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "knplabs/knp-gaufrette-bundle" : "v0.1.4",
         "knplabs/knp-menu-bundle": "v2.0.0-alpha1",
-        "smart-core/html-bundle": "dev-master"
+        "smart-core/html-bundle": "dev-master",
+        "liip/theme-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
