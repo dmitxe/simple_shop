@@ -4,3 +4,6 @@ shop_store:
 
 shop_site:
     resource: "@ShopSiteBundle/Resources/config/routing.yml"
+
+shop_user:
+    resource: "@ShopUserBundle/Resources/config/routing.yml"

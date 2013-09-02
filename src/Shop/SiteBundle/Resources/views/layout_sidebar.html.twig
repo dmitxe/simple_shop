@@ -58,7 +58,7 @@
             <div class="span12">
                 <div class="breadcrumb">
                     {% if breadcrumbs != '' %}
-                        {% set breadcrumbs = '<a href="' ~ path('dmitxe_site_index') ~ '">Главная</a> » ' ~ breadcrumbs %}
+                        {% set breadcrumbs = '<a href="' ~ path('shop_site_index') ~ '">Главная</a> » ' ~ breadcrumbs %}
                     {% endif %}
                     {% block breadcrumb %}
                         {{ breadcrumbs|raw }}

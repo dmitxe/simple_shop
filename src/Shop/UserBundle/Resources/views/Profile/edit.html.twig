@@ -1,0 +1,9 @@
+{% extends "ShopUserBundle::layout.html.twig" %}
+
+{% set breadcrumbs = '<a href="' ~ path('fos_user_profile_show') ~ '">Мой профиль</a> » ' ~ '<span>Редактирование</span>' %}
+
+{% block fos_user_content %}
+
+    {% include "ShopUserBundle:Profile:edit_content.html.twig" %}
+
+{% endblock fos_user_content %}

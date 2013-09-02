@@ -1,0 +1,9 @@
+{% extends 'ShopSiteBundle::layout.html.twig' %}
+
+{% if breadcrumbs == '' %}
+    {% set breadcrumbs = 'Регистрация' %}
+{% endif %}
+
+{% block content %}
+    {% block fos_user_content %}{% endblock %}
+{% endblock %}

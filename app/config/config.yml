@@ -22,8 +22,15 @@ framework:
 
 # Twig Configuration
 twig:
-    debug:            %kernel.debug%
+    debug: %kernel.debug%
     strict_variables: %kernel.debug%
+    globals:
+        html: @html
+        breadcrumbs: ''
+        pagerfanta_opts:
+            previous_message: '&laquo;'
+            next_message: '&raquo;'
+            dots_message: ' … '
 
 # Assetic Configuration
 assetic:
@@ -67,3 +74,15 @@ swiftmailer:
 knp_menu:
     twig:
         template: ShopSiteBundle:Menu:knp_menu.html.twig
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Shop\UserBundle\Entity\User
+    group:
+        group_class: Shop\UserBundle\Entity\Group
+
+services:
+    twig_extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags: [{ name: 'twig.extension' }]

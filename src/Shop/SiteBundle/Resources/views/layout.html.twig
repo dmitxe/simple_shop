@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block html_head_title %}{{ parent() }} Dmitry Xe's Personal Site {% endblock html_head_title %}
+{% block html_head_title %}{{ parent() }} Simple Shop Demo Site {% endblock html_head_title %}
 
 {% block html_head_meta %}{{ parent() }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,7 +39,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="{{ path('shop_site_index') }}">Dmitry Xe</a>
+                    <a class="brand" href="{{ path('shop_site_index') }}">Simple Shop</a>
                     <div class="nav-collapse">
 
                         {{ knp_menu_render('ShopSiteBundle:SiteMenu:main', {
@@ -47,7 +47,7 @@
                             'clear_matcher': false,
                         }) }}
 
- {#                       <ul class="nav pull-right">
+                        <ul class="nav pull-right">
                             {% if is_granted('ROLE_USER') %}
                                 <li class="divider-vertical"></li>
                                 <li class="dropdown">
@@ -65,13 +65,26 @@
                                     <a id="login-dropdown" class="dropdown-toggle" href="#" data-toggle="dropdown">Войти <strong class="caret"></strong></a>
                                     <div class="dropdown-menu" style="padding: 16px; padding-bottom: 0px;">
 
-                                        {{ render(controller('DmitxeUserBundle:Security:headerLogin')) }}
+                                        {{ render(controller('ShopUserBundle:Security:headerLogin')) }}
 
                                     </div>
                                 </li>
                             {% endif %}
-                        </ul>#}
+                        </ul>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <div class="breadcrumb">
+                    {% if breadcrumbs != '' %}
+                        {% set breadcrumbs = '<a href="' ~ path('shop_site_index') ~ '">Главная</a> » ' ~ breadcrumbs %}
+                    {% endif %}
+                    {% block breadcrumb %}
+                        {{ breadcrumbs|raw }}
+                    {% endblock breadcrumb %}
                 </div>
             </div>
         </div>
