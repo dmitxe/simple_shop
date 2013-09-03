@@ -36,10 +36,14 @@ class Attribute
      */
     private $type_value;
 
-   
+    /**
+     * @ORM\OneToMany(targetEntity="TableAttribute", mappedBy="Attribute")
+     */
+    protected $attribute_values;
+
     public function __construct()
     {
-      //  $this->attribute_values = new ArrayCollection();
+        $this->attribute_values = new ArrayCollection();
     }
     /**
      * Get id
