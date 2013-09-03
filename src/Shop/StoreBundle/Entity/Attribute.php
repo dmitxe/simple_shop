@@ -100,4 +100,37 @@ class Attribute
     {
         return $this->type_value;
     }
+
+    /**
+     * Add attribute_values
+     *
+     * @param \Shop\StoreBundle\Entity\TableAttribute $attributeValues
+     * @return Attribute
+     */
+    public function addAttributeValue(\Shop\StoreBundle\Entity\TableAttribute $attributeValues)
+    {
+        $this->attribute_values[] = $attributeValues;
+    
+        return $this;
+    }
+
+    /**
+     * Remove attribute_values
+     *
+     * @param \Shop\StoreBundle\Entity\TableAttribute $attributeValues
+     */
+    public function removeAttributeValue(\Shop\StoreBundle\Entity\TableAttribute $attributeValues)
+    {
+        $this->attribute_values->removeElement($attributeValues);
+    }
+
+    /**
+     * Get attribute_values
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAttributeValues()
+    {
+        return $this->attribute_values;
+    }
 }

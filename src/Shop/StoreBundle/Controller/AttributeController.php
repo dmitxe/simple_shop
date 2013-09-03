@@ -87,7 +87,7 @@ class AttributeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $attribute_values =$em->getRepository('ShopStoreBundle:TableAttribute')->
             findAll_attribute_values($id_attribute);
-       // print_r($attribute_values[0]);
+     //   ld($attribute_values[0]);
         return $this->render('ShopStoreBundle:Attribute:indexTableAttribute.html.twig',
             ['attribute_values'=>$attribute_values,'id_attribute'=>$id_attribute   ]);
     }

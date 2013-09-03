@@ -11,8 +11,8 @@ class TableAttributeRepository extends EntityRepository
      * @return EntityRepository|null
      */
     public function findAll_attribute_values($id_attribute)
-    { $q=" SELECT a  FROM ShopStoreBundle:TableAttribute AS a";
-      $q.=" where a.attribute_id=".$id_attribute;
+    { $q=" SELECT ta  FROM ShopStoreBundle:TableAttribute AS ta";
+      $q.=" join ShopStoreBundle:Attribute AS a where ta.attribute_id=".$id_attribute;
       return $this->getEntityManager()->createQuery($q)->getResult();
     }
 

@@ -26,7 +26,6 @@ class TableAttribute
      */
     private $attribute_id;
 
-
     /**
      * @var string
      *
@@ -41,7 +40,11 @@ class TableAttribute
      */
     private $nom;
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity="Attribute", inversedBy="attribute_values")
+     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id")
+     */
+    protected $attribute;
     /**
      * Get id
      *
@@ -123,5 +126,30 @@ class TableAttribute
     public function getAttributeId()
     {
         return $this->attribute_id;
+    }
+
+ 
+
+    /**
+     * Set attribute
+     *
+     * @param \Shop\StoreBundle\Entity\Attribute $attribute
+     * @return TableAttribute
+     */
+    public function setAttribute(\Shop\StoreBundle\Entity\Attribute $attribute = null)
+    {
+        $this->attribute = $attribute;
+    
+        return $this;
+    }
+
+    /**
+     * Get attribute
+     *
+     * @return \Shop\StoreBundle\Entity\Attribute 
+     */
+    public function getAttribute()
+    {
+        return $this->attribute;
     }
 }

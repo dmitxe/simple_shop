@@ -2,13 +2,17 @@
 <a href="{{ path('shop_store_tableAttribute_create', {'id_attribute': id_attribute}) }}">
     Добавить значение аттрибута
 </a>
+&nbsp;
+<a href="{{ path('shop_store_attribute') }}">
+    Таблица аттрибутов
+</a>
 
 
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Id</th>
-        <th>Id-Атрибута</th>
+        <th>Название Атрибута</th>
         <th>Значение</th> {# @todo убрать или сделать гибкую логику опознания налиция категорий у статей #}
         <th>Номер</th>
         <th>Редактировать</th>
@@ -16,13 +20,14 @@
     </thead>
     <tbody>
     {% for value in attribute_values %}
+        value|ld
         <tr>
             <td>{{ value.id }}</td>
-            <td>{{ value.attributeId }}</td>
+            <td>{{ value.attribute.name }}</td>
             <td>{{ value.value }}</td>
             <td>{{ value.nom }}</td>
             <td>
-                <a href="{{ path('shop_store_tableAttribute_edit', {'id_value_attribute': value.attributeId}) }}">
+                <a href="{{ path('shop_store_tableAttribute_edit', {'id_value_attribute': value.Id}) }}">
                     edit
                 </a>
             </td>
