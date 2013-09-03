@@ -1,7 +1,7 @@
 parameters:
-#    shop_store.example.class: Shop\StoreBundle\Example
+    shop_store.attribute.class: Shop\StoreBundle\Service\AttributeService
 
 services:
-#    shop_store.example:
-#        class: %shop_store.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    shop_store.attribute:
+        class: %shop_store.attribute.class%
+        arguments: []

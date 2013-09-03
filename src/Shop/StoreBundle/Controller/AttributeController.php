@@ -17,8 +17,6 @@ use Shop\StoreBundle\Form\Type\AttributeFormType ;
 
 class AttributeController extends Controller
 {
-    protected $_em;
-
     public function __construct()
     {
     }
@@ -27,6 +25,7 @@ class AttributeController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $attribute_service=$this->get('shop_store.attribute');
         $attributes =$em->getRepository('ShopStoreBundle:Attribute')->findAll();
         return $this->render('ShopStoreBundle:Attribute:index.html.twig',
             ['attributes'=>$attributes   ]);
@@ -90,7 +89,7 @@ class AttributeController extends Controller
             findAll_attribute_values($id_attribute);
        // print_r($attribute_values[0]);
         return $this->render('ShopStoreBundle:Attribute:indexTableAttribute.html.twig',
-            ['attribute_values'=>$attribute_values   ]);
+            ['attribute_values'=>$attribute_values,'id_attribute'=>$id_attribute   ]);
     }
     public function createTableAttributeAction(Request $request,$id_attribute)
     {
@@ -102,7 +101,7 @@ class AttributeController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $table_attribute->setIdAttribute($id_attribute);
+                $table_attribute->setAttributeId($id_attribute);
                 $table_attribute->setNom(1);
                 $em->persist($table_attribute);
                 $em->flush($table_attribute);

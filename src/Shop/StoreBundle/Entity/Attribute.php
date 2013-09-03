@@ -3,12 +3,13 @@
 namespace Shop\StoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Attribute
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Shop\StoreBundle\Entity\AttributeRepository")
+ * @ORM\Table(name="attribute")
+ * @ORM\Entity(repositoryClass="Shop\StoreBundle\Repository\AttributeRepository")
  */
 class Attribute
 {
@@ -35,7 +36,11 @@ class Attribute
      */
     private $type_value;
 
-
+   
+    public function __construct()
+    {
+      //  $this->attribute_values = new ArrayCollection();
+    }
     /**
      * Get id
      *
