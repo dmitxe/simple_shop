@@ -86,8 +86,7 @@ class AttributeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $attribute_values =$em->getRepository('ShopStoreBundle:TableAttribute')->
-            findAll_attribute_values($id_attribute);
-     //   ld($attribute_values[0]);
+            findAllAttributeValues($id_attribute);
         return $this->render('ShopStoreBundle:Attribute:indexTableAttribute.html.twig',
             ['attribute_values'=>$attribute_values,'id_attribute'=>$id_attribute   ]);
     }
@@ -101,10 +100,28 @@ class AttributeController extends Controller
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $table_attribute->setAttributeId($id_attribute);
-                $table_attribute->setNom(1);
+                $count_attribute_values = (int) $em->getRepository('ShopStoreBundle:TableAttribute')->
+                    findCountAttributeValues($id_attribute);
+            //    $table_attribute->setAttributeId((int) $id_attribute);
+                $table_attribute->setNom($count_attribute_values+1);
+                $attribute=$em->getRepository('ShopStoreBundle:Attribute')->find($id_attribute);
+                $table_attribute->setAttribute($attribute);
                 $em->persist($table_attribute);
                 $em->flush($table_attribute);
+
+            /*    if ('mysql' != $this->_em->getConnection()->getDatabasePlatform()->getName()) {
+                    throw new \Exception('
+                      insert пока работает только с БД MySQL.
+                      Call in Shop\StoreBundle\Repository\ArticleRepository::getArchiveMonthly();
+                    ');
+                }
+
+                $this->_em->getConnection()->insert('table_attribute', array('username' => 'jwage'));
+
+                ;$conn = $this->get('database_connection');
+                ;$conn->insert('user', array('username' => 'jwage'));
+                return $this->getEntityManager()->createQuery($q)->setParameter('id', $id_attribute)->getSingleScalarResult();
+*/
                 return $this->redirect($this->generateUrl('shop_store_tableAttribute',['id_attribute'=>$id_attribute]));
             }
         }
@@ -135,5 +152,5 @@ class AttributeController extends Controller
             'form' => $form->createView(),'id'=>$id_value_attribute,
         ]);
     }
-
 }
+

@@ -6,7 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Shop\StoreBundle\Service\AttributeService as Attribute_service;
+use Shop\StoreBundle\Service\AttributeService;
 
 class AttributeFormType extends AbstractType
 {
@@ -27,7 +27,7 @@ class AttributeFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $attribute_service=new Attribute_service;
+        $attribute_service=new AttributeService;
         $builder
             ->add('name',  null)
 //            ->add('type_value',  null)

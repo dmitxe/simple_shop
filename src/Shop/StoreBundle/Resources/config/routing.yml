@@ -1,27 +1,27 @@
 shop_store_attribute_create:
-    pattern:  /attribute/create/
+    path:  /attribute/create/
     defaults: { _controller: ShopStoreBundle:Attribute:create }
 shop_store_attribute_edit:
-    pattern:  /attribute/edit/{id}
+    path:  /attribute/edit/{id}
     defaults: { _controller: ShopStoreBundle:Attribute:edit }
     requirements:
       id: \d+
 shop_store_attribute:
-    pattern:  /attribute/
+    path:  /attribute/
     defaults: { _controller: ShopStoreBundle:Attribute:index }
 
 shop_store_tableAttribute:
-    pattern:  /tableAttribute/{id_attribute}
+    path:  /tableAttribute/{id_attribute}
     defaults: { _controller: ShopStoreBundle:Attribute:indexTableAttribute }
     requirements:
       id_attribute: \d+
 shop_store_tableAttribute_create:
-    pattern:  /tableAttribute/create/{id_attribute}
+    path:  /tableAttribute/create/{id_attribute}
     defaults: { _controller: ShopStoreBundle:Attribute:createTableAttribute }
     requirements:
       id_attribute: \d+
 shop_store_tableAttribute_edit:
-    pattern:  /tableAttribute/edit/{id_value_attribute}
+    path:  /tableAttribute/edit/{id_value_attribute}
     defaults: { _controller: ShopStoreBundle:Attribute:editTableAttribute }
     requirements:
       id_value_attribute: \d+
