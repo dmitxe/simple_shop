@@ -1,27 +1,36 @@
-shop_store_attribute_create:
-    path:  /attribute/create/
-    defaults: { _controller: ShopStoreBundle:Attribute:create }
-shop_store_attribute_edit:
-    path:  /attribute/edit/{id}
-    defaults: { _controller: ShopStoreBundle:Attribute:edit }
+shop_store_Property_create:
+    path:  /Property/create/
+    defaults: { _controller: ShopStoreBundle:Property:create }
+shop_store_Property_edit:
+    path:  /Property/edit/{id}
+    defaults: { _controller: ShopStoreBundle:Property:edit }
     requirements:
       id: \d+
-shop_store_attribute:
-    path:  /attribute/
-    defaults: { _controller: ShopStoreBundle:Attribute:index }
+shop_store_Property:
+    path:  /Property/
+    defaults: { _controller: ShopStoreBundle:Property:index }
 
-shop_store_AttributeValues:
-    path:  /AttributeValues/{id_attribute}
-    defaults: { _controller: ShopStoreBundle:Attribute:indexAttributeValues }
+shop_store_PropertyValues:
+    path:  /PropertyValues/{id_Property}
+    defaults: { _controller: ShopStoreBundle:Property:indexPropertyValues }
     requirements:
-      id_attribute: \d+
-shop_store_AttributeValues_create:
-    path:  /AttributeValues/create/{id_attribute}
-    defaults: { _controller: ShopStoreBundle:Attribute:createAttributeValues }
+      id_Property: \d+
+
+shop_store_PropertyValues_create:
+    path:  /PropertyValues/create/{id_Property}
+    defaults: { _controller: ShopStoreBundle:Property:createPropertyValues }
     requirements:
-      id_attribute: \d+
-shop_store_AttributeValues_edit:
-    path:  /AttributeValues/edit/{id_value_attribute}
-    defaults: { _controller: ShopStoreBundle:Attribute:editAttributeValues }
+      id_Property: \d+
+
+shop_store_PropertyValues_edit:
+    path:  /PropertyValues/edit/{id_value_Property}
+    defaults: { _controller: ShopStoreBundle:Property:editPropertyValues }
     requirements:
-      id_value_attribute: \d+
+      id_value_Property: \d+
+
+shop_store_PropertyValues_up:
+    path:  /PropertyValues/up/{id}/{id_old}
+    defaults: { _controller: ShopStoreBundle:Property:editPropertyValues }
+    requirements:
+      id: \d+
+      id_old: \d+

@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Attribute
+ * Property
  *
- * @ORM\Table(name="attribute")
- * @ORM\Entity(repositoryClass="Shop\StoreBundle\Repository\AttributeRepository")
+ * @ORM\Table(name="Property")
+ * @ORM\Entity(repositoryClass="Shop\StoreBundle\Repository\PropertyRepository")
  */
-class Attribute
+class Property
 {
     /**
      * @var integer
@@ -37,13 +37,13 @@ class Attribute
     private $type_value;
 
     /**
-     * @ORM\OneToMany(targetEntity="AttributeValues", mappedBy="Attribute")
+     * @ORM\OneToMany(targetEntity="PropertyValues", mappedBy="Property")
      */
-    protected $attribute_values;
+    protected $Property_values;
 
     public function __construct()
     {
-        $this->attribute_values = new ArrayCollection();
+        $this->Property_values = new ArrayCollection();
     }
     /**
      * Get id
@@ -59,7 +59,7 @@ class Attribute
      * Set name
      *
      * @param string $name
-     * @return Attribute
+     * @return Property
      */
     public function setName($name)
     {
@@ -82,7 +82,7 @@ class Attribute
      * Set type_value
      *
      * @param integer $typeValue
-     * @return Attribute
+     * @return Property
      */
     public function setTypeValue($typeValue)
     {
@@ -102,35 +102,35 @@ class Attribute
     }
 
     /**
-     * Add attribute_values
+     * Add Property_values
      *
-     * @param \Shop\StoreBundle\Entity\AttributeValues $attributeValues
-     * @return Attribute
+     * @param \Shop\StoreBundle\Entity\PropertyValues $PropertyValues
+     * @return Property
      */
-    public function addAttributeValue(\Shop\StoreBundle\Entity\AttributeValues $attributeValues)
+    public function addPropertyValue(\Shop\StoreBundle\Entity\PropertyValues $PropertyValues)
     {
-        $this->attribute_values[] = $attributeValues;
+        $this->Property_values[] = $PropertyValues;
     
         return $this;
     }
 
     /**
-     * Remove attribute_values
+     * Remove Property_values
      *
-     * @param \Shop\StoreBundle\Entity\AttributeValues $attributeValues
+     * @param \Shop\StoreBundle\Entity\PropertyValues $PropertyValues
      */
-    public function removeAttributeValue(\Shop\StoreBundle\Entity\AttributeValues $attributeValues)
+    public function removePropertyValue(\Shop\StoreBundle\Entity\PropertyValues $PropertyValues)
     {
-        $this->attribute_values->removeElement($attributeValues);
+        $this->Property_values->removeElement($PropertyValues);
     }
 
     /**
-     * Get attribute_values
+     * Get Property_values
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getAttributeValues()
+    public function getPropertyValues()
     {
-        return $this->attribute_values;
+        return $this->Property_values;
     }
 }

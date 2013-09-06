@@ -5,10 +5,10 @@ namespace Shop\StoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Shop\StoreBundle\Repository\AttributeValuesRepository")
- * @ORM\Table(name="attribute_values")
+ * @ORM\Entity(repositoryClass="Shop\StoreBundle\Repository\PropertyValuesRepository")
+ * @ORM\Table(name="Property_values")
  */
-class AttributeValues
+class PropertyValues
 {
     /**
      * @var integer
@@ -22,9 +22,9 @@ class AttributeValues
     /**
      * @var integer
      *
-     * @ORM\Column(name="attribute_id", type="integer")
+     * @ORM\Column(name="property_id", type="integer")
      */
-    private $attribute_id;
+    private $property_id;
 
     /**
      * @var string
@@ -41,10 +41,10 @@ class AttributeValues
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Attribute", inversedBy="attribute_values")
-     * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Property", inversedBy="Property_values")
+     * @ORM\JoinColumn(name="property_id", referencedColumnName="id")
      */
-    protected $attribute;
+    protected $Property;
     /**
      * Get id
      *
@@ -59,7 +59,7 @@ class AttributeValues
      * Set value
      *
      * @param string $value
-     * @return AttributeValues
+     * @return PropertyValues
      */
     public function setValue($value)
     {
@@ -79,58 +79,58 @@ class AttributeValues
     }
 
     /**
-     * Set attribute_id
+     * Set property_id
      *
-     * @param integer $attributeId
-     * @return AttributeValues
+     * @param integer $PropertyId
+     * @return PropertyValues
      */
-    public function setAttributeId($attributeId)
+    public function setPropertyId($PropertyId)
     {
-        $this->attribute_id = $attributeId;
+        $this->property_id = $PropertyId;
     
         return $this;
     }
 
     /**
-     * Get attribute_id
+     * Get property_id
      *
      * @return integer 
      */
-    public function getAttributeId()
+    public function getPropertyId()
     {
-        return $this->attribute_id;
+        return $this->property_id;
     }
 
  
 
     /**
-     * Set attribute
+     * Set Property
      *
-     * @param \Shop\StoreBundle\Entity\Attribute $attribute
-     * @return AttributeValues
+     * @param \Shop\StoreBundle\Entity\Property $Property
+     * @return PropertyValues
      */
-    public function setAttribute(\Shop\StoreBundle\Entity\Attribute $attribute = null)
+    public function setProperty(\Shop\StoreBundle\Entity\Property $Property = null)
     {
-        $this->attribute = $attribute;
+        $this->Property = $Property;
     
         return $this;
     }
 
     /**
-     * Get attribute
+     * Get Property
      *
-     * @return \Shop\StoreBundle\Entity\Attribute 
+     * @return \Shop\StoreBundle\Entity\Property
      */
-    public function getAttribute()
+    public function getProperty()
     {
-        return $this->attribute;
+        return $this->Property;
     }
 
     /**
      * Set position
      *
      * @param integer $position
-     * @return AttributeValues
+     * @return PropertyValues
      */
     public function setPosition($position)
     {

@@ -4,7 +4,7 @@ namespace Shop\StoreBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 
-class AttributeValuesCreateFormType extends AttributeValuesFormType
+class PropertyValuesCreateFormType extends PropertyValuesFormType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,6 +19,6 @@ class AttributeValuesCreateFormType extends AttributeValuesFormType
 
     public function getName()
     {
-        return 'shop_store_AttributeValues_create';
+        return 'shop_store_PropertyValues_create';
     }
 }

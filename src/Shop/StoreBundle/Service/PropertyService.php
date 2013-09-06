@@ -10,7 +10,8 @@
 namespace Shop\StoreBundle\Service;
 
 
-class AttributeService {
+class PropertyService
+{
     /**
      * @var integer
      */
@@ -28,6 +29,4 @@ class AttributeService {
     {
         return $this->type_field;
     }
-
-
 }

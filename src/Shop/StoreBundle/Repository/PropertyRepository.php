@@ -4,17 +4,17 @@ namespace Shop\StoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class AttributeRepository extends EntityRepository
+class PropertyRepository extends EntityRepository
 {
     /**
-     * @param string $attributeValues
+     * @param string $PropertyValues
      * @return EntityRepository|null
      */
-    public function findall_attributes($attributeValues)
+    public function findall_Propertys($PropertyValues)
     {
         return $this->_em->createQuery("
             SELECT a
-            FROM {$attributeValues} AS a
+            FROM {$PropertyValues} AS a
             ORDER BY a.id
         ");
     }

@@ -4,7 +4,7 @@ namespace Shop\StoreBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 
-class AttributeValuesEditFormType extends AttributeValuesFormType
+class PropertyEditFormType extends PropertyFormType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,6 +19,6 @@ class AttributeValuesEditFormType extends AttributeValuesFormType
 
     public function getName()
     {
-        return 'shop_AttributeValues_edit';
+        return 'shop_Property_edit';
     }
 }

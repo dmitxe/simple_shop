@@ -4,13 +4,13 @@ namespace Shop\StoreBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
 
-class AttributeEditFormType extends AttributeFormType
+class PropertyCreateFormType extends PropertyFormType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('save', 'submit', [
+        $builder->add('create', 'submit', [
             'attr' => [
                 'class' => 'btn btn-primary',
             ],
@@ -19,6 +19,6 @@ class AttributeEditFormType extends AttributeFormType
 
     public function getName()
     {
-        return 'shop_attribute_edit';
+        return 'shop_Property_create';
     }
 }

@@ -1,7 +1,13 @@
 parameters:
-    shop_store.attribute.class: Shop\StoreBundle\Service\AttributeService
+    shop_store.property.class: Shop\StoreBundle\Service\PropertyService
+    shop_store.property.class: Shop\StoreBundle\Service\PropertyValuesService
 
 services:
-    shop_store.attribute:
-        class: %shop_store.attribute.class%
+    shop_store.property:
+        class: %shop_store.property.class%
         arguments: []
+
+    shop_store.PropertyValues:
+        class: %shop_store.property.class%
+        arguments: []
+

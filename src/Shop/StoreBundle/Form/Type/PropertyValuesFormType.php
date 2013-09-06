@@ -5,10 +5,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Shop\StoreBundle\Service\AttributeService;
-
-class AttributeFormType extends AbstractType
+class PropertyValuesFormType extends AbstractType
 {
     protected $class;
 
@@ -20,23 +17,10 @@ class AttributeFormType extends AbstractType
         $this->class = $class;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     *
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $attribute_service=new AttributeService;
         $builder
-            ->add('name',  null)
-//            ->add('type_value',  null)
-            ->add('type_value', 'choice', array(
-                'choices' => $attribute_service->getType_field(),
-//                'choices' =>  array('m' => 'Male', 'f' => 'Female'),
-                  'required'  => false,
-              ));
-
+            ->add('value')
         ;
     }
 
@@ -49,6 +33,6 @@ class AttributeFormType extends AbstractType
 
     public function getName()
     {
-        return 'shop_attribute';
+        return 'shop_store_PropertyValues';
     }
 }
