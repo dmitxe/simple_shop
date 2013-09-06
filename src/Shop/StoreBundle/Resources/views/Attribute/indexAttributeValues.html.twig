@@ -1,4 +1,4 @@
-<a href="{{ path('shop_store_tableAttribute_create', {'id_attribute': id_attribute}) }}">
+<a href="{{ path('shop_store_AttributeValues_create', {'id_attribute': id_attribute}) }}">
     Добавить значение аттрибута
 </a>
 &nbsp;
@@ -22,9 +22,9 @@
             <td>{{ value.id }}</td>
             <td>{{ value.attribute.name }}</td>
             <td>{{ value.value }}</td>
-            <td>{{ value.nom }}</td>
+            <td>{{ value.position }}</td>
             <td>
-                <a href="{{ path('shop_store_tableAttribute_edit', {'id_value_attribute': value.Id}) }}">
+                <a href="{{ path('shop_store_AttributeValues_edit', {'id_value_attribute': value.Id}) }}">
                     edit
                 </a>
             </td>

@@ -5,10 +5,10 @@ namespace Shop\StoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Shop\StoreBundle\Repository\TableAttributeRepository")
- * @ORM\Table(name="table_attribute")
+ * @ORM\Entity(repositoryClass="Shop\StoreBundle\Repository\AttributeValuesRepository")
+ * @ORM\Table(name="attribute_values")
  */
-class TableAttribute
+class AttributeValues
 {
     /**
      * @var integer
@@ -36,9 +36,9 @@ class TableAttribute
     /**
      * @var integer
      *
-     * @ORM\Column(name="nom", type="integer")
+     * @ORM\Column(name="position", type="integer")
      */
-    private $nom;
+    private $position;
 
     /**
      * @ORM\ManyToOne(targetEntity="Attribute", inversedBy="attribute_values")
@@ -55,13 +55,11 @@ class TableAttribute
         return $this->id;
     }
 
-
-
     /**
      * Set value
      *
      * @param string $value
-     * @return TableAttribute
+     * @return AttributeValues
      */
     public function setValue($value)
     {
@@ -81,35 +79,10 @@ class TableAttribute
     }
 
     /**
-     * Set nom
-     *
-     * @param integer $nom
-     * @return TableAttribute
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    
-        return $this;
-    }
-
-    /**
-     * Get nom
-     *
-     * @return integer 
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-
-
-    /**
      * Set attribute_id
      *
      * @param integer $attributeId
-     * @return TableAttribute
+     * @return AttributeValues
      */
     public function setAttributeId($attributeId)
     {
@@ -134,7 +107,7 @@ class TableAttribute
      * Set attribute
      *
      * @param \Shop\StoreBundle\Entity\Attribute $attribute
-     * @return TableAttribute
+     * @return AttributeValues
      */
     public function setAttribute(\Shop\StoreBundle\Entity\Attribute $attribute = null)
     {
@@ -151,5 +124,28 @@ class TableAttribute
     public function getAttribute()
     {
         return $this->attribute;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return AttributeValues
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

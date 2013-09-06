@@ -37,7 +37,7 @@ class Attribute
     private $type_value;
 
     /**
-     * @ORM\OneToMany(targetEntity="TableAttribute", mappedBy="Attribute")
+     * @ORM\OneToMany(targetEntity="AttributeValues", mappedBy="Attribute")
      */
     protected $attribute_values;
 
@@ -104,10 +104,10 @@ class Attribute
     /**
      * Add attribute_values
      *
-     * @param \Shop\StoreBundle\Entity\TableAttribute $attributeValues
+     * @param \Shop\StoreBundle\Entity\AttributeValues $attributeValues
      * @return Attribute
      */
-    public function addAttributeValue(\Shop\StoreBundle\Entity\TableAttribute $attributeValues)
+    public function addAttributeValue(\Shop\StoreBundle\Entity\AttributeValues $attributeValues)
     {
         $this->attribute_values[] = $attributeValues;
     
@@ -117,9 +117,9 @@ class Attribute
     /**
      * Remove attribute_values
      *
-     * @param \Shop\StoreBundle\Entity\TableAttribute $attributeValues
+     * @param \Shop\StoreBundle\Entity\AttributeValues $attributeValues
      */
-    public function removeAttributeValue(\Shop\StoreBundle\Entity\TableAttribute $attributeValues)
+    public function removeAttributeValue(\Shop\StoreBundle\Entity\AttributeValues $attributeValues)
     {
         $this->attribute_values->removeElement($attributeValues);
     }

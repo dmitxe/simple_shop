@@ -3,16 +3,16 @@
 namespace Shop\StoreBundle\Controller;
 
 use Shop\StoreBundle\Form\Type\AttributeEditFormType;
-use Shop\StoreBundle\Form\Type\TableAttributeEditFormType;
+use Shop\StoreBundle\Form\Type\AttributeValuesEditFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-use Shop\StoreBundle\Entity\Attribute as AttributeClass;
-use Shop\StoreBundle\Repository\TableAttributeRepository;
-use Shop\StoreBundle\Entity\TableAttribute as TableAttribute;
+use Shop\StoreBundle\Entity\Attribute;
+use Shop\StoreBundle\Repository\AttributeValuesRepository;
+use Shop\StoreBundle\Entity\AttributeValues;
 use Shop\StoreBundle\Form\Type\AttributeCreateFormType ;
-use Shop\StoreBundle\Form\Type\TableAttributeCreateFormType ;
+use Shop\StoreBundle\Form\Type\AttributeValuesCreateFormType ;
 use Shop\StoreBundle\Form\Type\AttributeFormType ;
 
 class AttributeController extends Controller
@@ -33,16 +33,16 @@ class AttributeController extends Controller
 
     public function createAction(Request $request)
     {
-        $attribute_name = new AttributeClass;
+        $attribute = new Attribute;
         $class='Shop\StoreBundle\Entity\Attribute';
-        $form = $this->createForm(new AttributeCreateFormType($class),  $attribute_name);
+        $form = $this->createForm(new AttributeCreateFormType($class),  $attribute);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($attribute_name);
-                $em->flush($attribute_name);
+                $em->persist($attribute);
+                $em->flush($attribute);
                 return $this->redirect($this->generateUrl('shop_store_attribute'));
             }
         }
@@ -82,73 +82,60 @@ class AttributeController extends Controller
         ]);
     }
 
-    public function indexTableAttributeAction(Request $request,$id_attribute)
+    public function indexAttributeValuesAction(Request $request,$id_attribute)
     {
         $em = $this->getDoctrine()->getManager();
-        $attribute_values =$em->getRepository('ShopStoreBundle:TableAttribute')->
+        $attribute_values =$em->getRepository('ShopStoreBundle:AttributeValues')->
             findAllAttributeValues($id_attribute);
-        return $this->render('ShopStoreBundle:Attribute:indexTableAttribute.html.twig',
+        return $this->render('ShopStoreBundle:Attribute:indexAttributeValues.html.twig',
             ['attribute_values'=>$attribute_values,'id_attribute'=>$id_attribute   ]);
     }
-    public function createTableAttributeAction(Request $request,$id_attribute)
+
+    public function createAttributeValuesAction(Request $request,$id_attribute)
     {
-        $table_attribute = new TableAttribute;
-        $class='Shop\StoreBundle\Entity\TableAttribute';
-        $form = $this->createForm(new TableAttributeCreateFormType($class), $table_attribute);
+        $table_attribute = new AttributeValues;
+        $class='Shop\StoreBundle\Entity\AttributeValues';
+        $form = $this->createForm(new AttributeValuesCreateFormType($class), $table_attribute);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $count_attribute_values = (int) $em->getRepository('ShopStoreBundle:TableAttribute')->
+                $count_attribute_values = (int) $em->getRepository('ShopStoreBundle:AttributeValues')->
                     findCountAttributeValues($id_attribute);
             //    $table_attribute->setAttributeId((int) $id_attribute);
-                $table_attribute->setNom($count_attribute_values+1);
+                $table_attribute->setPosition($count_attribute_values+1);
                 $attribute=$em->getRepository('ShopStoreBundle:Attribute')->find($id_attribute);
                 $table_attribute->setAttribute($attribute);
                 $em->persist($table_attribute);
                 $em->flush($table_attribute);
-
-            /*    if ('mysql' != $this->_em->getConnection()->getDatabasePlatform()->getName()) {
-                    throw new \Exception('
-                      insert пока работает только с БД MySQL.
-                      Call in Shop\StoreBundle\Repository\ArticleRepository::getArchiveMonthly();
-                    ');
-                }
-
-                $this->_em->getConnection()->insert('table_attribute', array('username' => 'jwage'));
-
-                ;$conn = $this->get('database_connection');
-                ;$conn->insert('user', array('username' => 'jwage'));
-                return $this->getEntityManager()->createQuery($q)->setParameter('id', $id_attribute)->getSingleScalarResult();
-*/
-                return $this->redirect($this->generateUrl('shop_store_tableAttribute',['id_attribute'=>$id_attribute]));
+                return $this->redirect($this->generateUrl('shop_store_AttributeValues',['id_attribute'=>$id_attribute]));
             }
         }
 
-        return $this->render('ShopStoreBundle:Attribute:createTableAttribute.html.twig', [
+        return $this->render('ShopStoreBundle:Attribute:createAttributeValues.html.twig', [
             'form' => $form->createView(),'id_attribute'=>$id_attribute,
         ]);
     }
 
-    public function editTableAttributeAction(Request $request,$id_value_attribute)
+    public function editAttributeValuesAction(Request $request,$id_value_attribute)
     {
         $em = $this->getDoctrine()->getManager();
-        $attribute_value =$em->getRepository('ShopStoreBundle:TableAttribute')->
+        $attribute_value =$em->getRepository('ShopStoreBundle:AttributeValues')->
             find($id_value_attribute);
-        $class='Shop\StoreBundle\Entity\TableAttribute';
-        $form = $this->createForm(new TableAttributeEditFormType($class), $attribute_value);
+        $class='Shop\StoreBundle\Entity\AttributeValues';
+        $form = $this->createForm(new AttributeValuesEditFormType($class), $attribute_value);
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $em->flush($attribute_value);
-                return $this->redirect($this->generateUrl('shop_store_tableAttribute',
+                return $this->redirect($this->generateUrl('shop_store_AttributeValues',
                     ['id_attribute'=>$attribute_value->getAttributeId()]));
             }
         }
 
-        return $this->render('ShopStoreBundle:Attribute:editTableAttribute.html.twig', [
+        return $this->render('ShopStoreBundle:Attribute:editAttributeValues.html.twig', [
             'form' => $form->createView(),'id'=>$id_value_attribute,
         ]);
     }

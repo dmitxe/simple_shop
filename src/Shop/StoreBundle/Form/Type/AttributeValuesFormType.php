@@ -5,7 +5,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TableAttributeFormType extends AbstractType
+class AttributeValuesFormType extends AbstractType
 {
     protected $class;
 
@@ -33,6 +33,6 @@ class TableAttributeFormType extends AbstractType
 
     public function getName()
     {
-        return 'shop_store_tableAttribute';
+        return 'shop_store_AttributeValues';
     }
 }

@@ -10,18 +10,18 @@ shop_store_attribute:
     path:  /attribute/
     defaults: { _controller: ShopStoreBundle:Attribute:index }
 
-shop_store_tableAttribute:
-    path:  /tableAttribute/{id_attribute}
-    defaults: { _controller: ShopStoreBundle:Attribute:indexTableAttribute }
+shop_store_AttributeValues:
+    path:  /AttributeValues/{id_attribute}
+    defaults: { _controller: ShopStoreBundle:Attribute:indexAttributeValues }
     requirements:
       id_attribute: \d+
-shop_store_tableAttribute_create:
-    path:  /tableAttribute/create/{id_attribute}
-    defaults: { _controller: ShopStoreBundle:Attribute:createTableAttribute }
+shop_store_AttributeValues_create:
+    path:  /AttributeValues/create/{id_attribute}
+    defaults: { _controller: ShopStoreBundle:Attribute:createAttributeValues }
     requirements:
       id_attribute: \d+
-shop_store_tableAttribute_edit:
-    path:  /tableAttribute/edit/{id_value_attribute}
-    defaults: { _controller: ShopStoreBundle:Attribute:editTableAttribute }
+shop_store_AttributeValues_edit:
+    path:  /AttributeValues/edit/{id_value_attribute}
+    defaults: { _controller: ShopStoreBundle:Attribute:editAttributeValues }
     requirements:
       id_value_attribute: \d+
