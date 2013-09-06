@@ -3,6 +3,8 @@
 namespace Shop\StoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Shop\StoreBundle\Entity\Property;
+use Shop\StoreBundle\Repository\PropertyValuesRepository;
 
 /**
  * @ORM\Entity(repositoryClass="Shop\StoreBundle\Repository\PropertyValuesRepository")
@@ -41,7 +43,7 @@ class PropertyValues
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Property", inversedBy="Property_values")
+     * @ORM\ManyToOne(targetEntity="Shop\StoreBundle\Entity\Property", inversedBy="Property_values")
      * @ORM\JoinColumn(name="property_id", referencedColumnName="id")
      */
     protected $Property;
@@ -106,10 +108,10 @@ class PropertyValues
     /**
      * Set Property
      *
-     * @param \Shop\StoreBundle\Entity\Property $Property
+     * @param Property $Property
      * @return PropertyValues
      */
-    public function setProperty(\Shop\StoreBundle\Entity\Property $Property = null)
+    public function setProperty(Property $Property = null)
     {
         $this->Property = $Property;
     
@@ -119,7 +121,7 @@ class PropertyValues
     /**
      * Get Property
      *
-     * @return \Shop\StoreBundle\Entity\Property
+     * @return Property
      */
     public function getProperty()
     {

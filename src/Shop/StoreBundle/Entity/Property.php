@@ -4,6 +4,8 @@ namespace Shop\StoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Shop\StoreBundle\Entity\PropertyValues;
+use Shop\StoreBundle\Repository\PropertyRepository;
 
 /**
  * Property
@@ -37,7 +39,7 @@ class Property
     private $type_value;
 
     /**
-     * @ORM\OneToMany(targetEntity="PropertyValues", mappedBy="Property")
+     * @ORM\OneToMany(targetEntity="Shop\StoreBundle\Entity\PropertyValues", mappedBy="Property")
      */
     protected $Property_values;
 
@@ -104,10 +106,10 @@ class Property
     /**
      * Add Property_values
      *
-     * @param \Shop\StoreBundle\Entity\PropertyValues $PropertyValues
+     * @param PropertyValues $PropertyValues
      * @return Property
      */
-    public function addPropertyValue(\Shop\StoreBundle\Entity\PropertyValues $PropertyValues)
+    public function addPropertyValue(PropertyValues $PropertyValues)
     {
         $this->Property_values[] = $PropertyValues;
     
@@ -117,9 +119,9 @@ class Property
     /**
      * Remove Property_values
      *
-     * @param \Shop\StoreBundle\Entity\PropertyValues $PropertyValues
+     * @param PropertyValues $PropertyValues
      */
-    public function removePropertyValue(\Shop\StoreBundle\Entity\PropertyValues $PropertyValues)
+    public function removePropertyValue(PropertyValues $PropertyValues)
     {
         $this->Property_values->removeElement($PropertyValues);
     }

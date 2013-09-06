@@ -18,7 +18,4 @@ class PropertyRepository extends EntityRepository
             ORDER BY a.id
         ");
     }
-
-
-
 }
