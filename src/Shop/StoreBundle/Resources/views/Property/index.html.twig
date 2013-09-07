@@ -1,32 +1,36 @@
-<a href="{{ path('shop_store_Property_create') }}">
-    Добавить свойство
-</a>
+{% extends 'ShopStoreBundle::layout.html.twig' %}
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Название</th>
-        <th>Редактировать</th>
-        <th>Значения свойства</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for Property in Propertys %}
+{% block admin_content %}
+    <a href="{{ path('shop_store_Property_create') }}">
+        Добавить свойство
+    </a>
+
+    <table class="table table-striped">
+        <thead>
         <tr>
-            <td>{{ Property.id }}</td>
-            <td>{{ Property.name }}</td>
-            <td>
-                <a href="{{ path('shop_store_Property_edit', {'id': Property.id}) }}">
-                    edit
-                </a>
-            </td>
-            <td>
-                <a href="{{ path('shop_store_PropertyValues', {'id_Property': Property.id}) }}">
-                    value
-                </a>
-            </td>
+            <th>Id</th>
+            <th>Название</th>
+            <th>Редактировать</th>
+            <th>Значения свойства</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        {% for Property in Propertys %}
+            <tr>
+                <td>{{ Property.id }}</td>
+                <td>{{ Property.name }}</td>
+                <td>
+                    <a href="{{ path('shop_store_Property_edit', {'id': Property.id}) }}">
+                        edit
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('shop_store_PropertyValues', {'id_property': Property.id}) }}">
+                        value
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock admin_content %}

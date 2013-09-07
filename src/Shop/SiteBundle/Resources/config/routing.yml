@@ -3,7 +3,7 @@ shop_site_index:
     defaults: { _controller: ShopSiteBundle:Page:index }
 
 shop_site_admin:
-    path: /admin/
+    path: /administrator/
     defaults: { _controller: ShopSiteBundle:Admin:index }
 
 shop_site_about:

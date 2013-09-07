@@ -82,11 +82,11 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function indexPropertyValuesAction(Request $request,$id_Property)
+    public function indexPropertyValuesAction(Request $request,$id_property)
     {
         $em = $this->getDoctrine()->getManager();
         $Property_values =$em->getRepository('ShopStoreBundle:PropertyValues')->
-            findAllPropertyValues($id_Property);
+            findAllPropertyValues($id_property);
 //        ld($Property_values);
         if( count($Property_values)>0)
         {
@@ -101,7 +101,7 @@ class PropertyController extends Controller
 //        ld($param_url_down);
         return $this->render('ShopStoreBundle:Property:indexPropertyValues.html.twig',
             [    'Property_values' => $Property_values,
-                 'id_Property' => $id_Property,
+                 'id_property' => $id_property,
                 'param_url_up' => $param_url_up,
                 'param_url_down' => $param_url_down,
             ]);
@@ -125,11 +125,11 @@ class PropertyController extends Controller
                 $table_Property->setProperty($Property);
                 $em->persist($table_Property);
                 $em->flush($table_Property);
-                return $this->redirect($this->generateUrl('shop_store_PropertyValues',['id_Property'=>$id_Property]));
+                return $this->redirect($this->generateUrl('shop_store_PropertyValues',['id_property'=>$id_Property]));
             }
         }
         return $this->render('ShopStoreBundle:Property:createPropertyValues.html.twig', [
-            'form' => $form->createView(),'id_Property'=>$id_Property,
+            'form' => $form->createView(),'id_property'=>$id_Property,
         ]);
     }
 
@@ -146,7 +146,7 @@ class PropertyController extends Controller
             if ($form->isValid()) {
                 $em->flush($Property_value);
                 return $this->redirect($this->generateUrl('shop_store_PropertyValues',
-                    ['id_Property'=>$Property_value->getPropertyId()]));
+                    ['id_property'=>$Property_value->getPropertyId()]));
             }
         }
 
@@ -172,7 +172,7 @@ class PropertyController extends Controller
         $em->persist($Property_value);
         $em->flush($Property_value);
         return $this->redirect($this->generateUrl('shop_store_PropertyValues',
-            ['id_Property'=>$Property_value->getPropertyId()]));
+            ['id_property'=>$Property_value->getPropertyId()]));
     }
 
     public function downPropertyValuesAction(Request $request,$id,$id_old)
@@ -196,7 +196,7 @@ class PropertyController extends Controller
         $em->persist($Property_value);
         $em->flush($Property_value);
         return $this->redirect($this->generateUrl('shop_store_PropertyValues',
-            ['id_Property'=>$Property_value->getPropertyId()]));
+            ['id_property'=>$Property_value->getPropertyId()]));
     }
 }
 

@@ -1,6 +1,6 @@
 shop_store:
     resource: "@ShopStoreBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /administrator/shop/
 
 shop_site:
     resource: "@ShopSiteBundle/Resources/config/routing.yml"

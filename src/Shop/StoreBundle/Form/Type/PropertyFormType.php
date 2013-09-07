@@ -35,6 +35,10 @@ class PropertyFormType extends AbstractType
             ->add('type_value', 'choice', array(
                 'choices' => $mas,
                 'required'  => false,
+//                'empty_data' => '2',
+                'empty_value' => 'Выберите тип...',
+//                'preferred_choices' => [2],
+                'data' => 2,
               ));
 
         ;

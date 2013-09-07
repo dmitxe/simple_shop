@@ -1,3 +1,7 @@
+shop_store_admin:
+    path:  /
+    defaults: { _controller: ShopStoreBundle:Store:index }
+
 shop_store_Property_create:
     path:  /Property/create/
     defaults: { _controller: ShopStoreBundle:Property:create }
@@ -7,14 +11,14 @@ shop_store_Property_edit:
     requirements:
       id: \d+
 shop_store_Property:
-    path:  /Property/
+    path:  /property/
     defaults: { _controller: ShopStoreBundle:Property:index }
 
 shop_store_PropertyValues:
-    path:  /PropertyValues/{id_Property}
+    path:  /property_values/{id_property}
     defaults: { _controller: ShopStoreBundle:Property:indexPropertyValues }
     requirements:
-      id_Property: \d+
+      id_property: \d+
 
 shop_store_PropertyValues_create:
     path:  /PropertyValues/create/{id_Property}

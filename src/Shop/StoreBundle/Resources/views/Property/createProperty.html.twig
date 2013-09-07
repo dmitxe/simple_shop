@@ -1,4 +1,7 @@
-<form action="{{ path('shop_store_Property_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+{% extends 'ShopStoreBundle::layout.html.twig' %}
 
-</form>
+{% block admin_content %}
+    <form action="{{ path('shop_store_Property_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+    </form>
+{% endblock admin_content %}
