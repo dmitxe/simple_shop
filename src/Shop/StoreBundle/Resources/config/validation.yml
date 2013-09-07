@@ -1,0 +1,12 @@
+Shop\StoreBundle\Entity\Property:
+  properties:
+      name:
+              - NotBlank: ~
+      type_value:
+              - NotBlank: ~
+
+Shop\StoreBundle\Entity\PropertyValues:
+  properties:
+       value:
+              - NotBlank: ~
+

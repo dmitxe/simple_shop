@@ -30,7 +30,14 @@ shop_store_PropertyValues_edit:
 
 shop_store_PropertyValues_up:
     path:  /PropertyValues/up/{id}/{id_old}
-    defaults: { _controller: ShopStoreBundle:Property:editPropertyValues }
+    defaults: { _controller: ShopStoreBundle:Property:upPropertyValues }
+    requirements:
+      id: \d+
+      id_old: \d+
+
+shop_store_PropertyValues_down:
+    path:  /PropertyValues/down/{id}/{id_old}
+    defaults: { _controller: ShopStoreBundle:Property:downPropertyValues }
     requirements:
       id: \d+
       id_old: \d+

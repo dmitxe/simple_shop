@@ -27,14 +27,14 @@ class PropertyFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $Property_service=new PropertyService;
+        $Property_service = new PropertyService;
+        $mas =  $Property_service->getType_field();
         $builder
             ->add('name',  null)
 //            ->add('type_value',  null)
             ->add('type_value', 'choice', array(
-                'choices' => $Property_service->getType_field(),
-//                'choices' =>  array('m' => 'Male', 'f' => 'Female'),
-                  'required'  => false,
+                'choices' => $mas,
+                'required'  => false,
               ));
 
         ;

@@ -13,7 +13,8 @@ class PropertyValuesRepository extends EntityRepository
     public function findAllPropertyValues($id_Property)
     {
         $q = " SELECT ta  FROM ShopStoreBundle:PropertyValues AS ta";
-        $q .= " join ShopStoreBundle:Property AS a where ta.Property_id=" . $id_Property;
+        $q .= " join ShopStoreBundle:Property AS a where ta.property_id=" . $id_Property;
+        $q .= " order by ta.property_id, ta.position";
         return $this->getEntityManager()->createQuery($q)->getResult();
     }
     /**
@@ -23,7 +24,7 @@ class PropertyValuesRepository extends EntityRepository
     public function findCountPropertyValues($id_Property)
     {
         $q = " SELECT  COUNT(ta.id) as kol  FROM ShopStoreBundle:PropertyValues AS ta";
-        $q .= " where ta.Property_id = :id";
+        $q .= " where ta.property_id = :id";
         return $this->getEntityManager()->createQuery($q)->setParameter('id', $id_Property)->getSingleScalarResult();
     }
 }
