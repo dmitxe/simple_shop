@@ -28,10 +28,11 @@ shop_store_PropertyValues_create:
       id_Property: \d+
 
 shop_store_PropertyValues_edit:
-    path:  /PropertyValues/edit/{id_value_Property}
+    path:  /PropertyValues/edit/{id_value_Property}/{page}
     defaults: { _controller: ShopStoreBundle:Property:editPropertyValues }
     requirements:
       id_value_Property: \d+
+      page: \d+
 
 shop_store_PropertyValues_up:
     path:  /PropertyValues/up/{id}/{page}

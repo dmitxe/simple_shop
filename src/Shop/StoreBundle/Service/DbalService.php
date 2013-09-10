@@ -8,6 +8,7 @@
  */
 
 namespace Shop\StoreBundle\Service;
+use Doctrine\ORM\EntityRepository;
 
 
 class DbalService
@@ -27,7 +28,6 @@ class DbalService
 
     public function getType_field()
     {
-        return $this->type_field;
     }
 
 

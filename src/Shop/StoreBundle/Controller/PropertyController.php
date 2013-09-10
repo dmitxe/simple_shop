@@ -93,18 +93,21 @@ class PropertyController extends Controller
             $service_route = $this->container->get('router');
             $pagen_service = $this->get('shop_store.Pagen');
             $pagen_service->setInterval_page(2);
+            $pagen_service->setItems_per_page(4);
             $route = 'shop_store_PropertyValues';
             $route_parameters = array( 'id_property'=>$id_property, 'page'=>$page );
             $pager = $pagen_service->myPaginat( $all_count, $route,$route_parameters,$page,$service_route);
             $page = $pagen_service->getPage();
             $limit = $pagen_service->getItems_per_page();
-            $offset = ($page-1)*$limit+1;
+//            $offset = ($page-1)*$limit+1;
+            $offset = ($page-1)*$limit;
             ld(' limit='.$limit.'  off='.$offset);
             $propertyValuesService = $this->get('shop_store.PropertyValues');
             $Property_values = $em->getRepository('ShopStoreBundle:PropertyValues')->
-                findAllPropertyValues($id_property,$offset,$limit);
+                findAllPropertyValuesDBAL($id_property,$offset,$limit);
+//            findAllPropertyValues($id_property,$offset,$limit);
             ld($Property_values);
-            $param_url = $propertyValuesService->getUrl( $Property_values );
+            $param_url = $propertyValuesService->getUrlDbal( $Property_values );
         }
         else{
             $param_url = array();
@@ -147,7 +150,7 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function editPropertyValuesAction(Request $request,$id_value_Property)
+    public function editPropertyValuesAction(Request $request,$id_value_Property,$page)
     {
         $em = $this->getDoctrine()->getManager();
         $Property_value =$em->getRepository('ShopStoreBundle:PropertyValues')->
@@ -160,12 +163,12 @@ class PropertyController extends Controller
             if ($form->isValid()) {
                 $em->flush($Property_value);
                 return $this->redirect($this->generateUrl('shop_store_PropertyValues',
-                    ['id_property'=>$Property_value->getPropertyId(),'page'=>1]));
+                    ['id_property'=>$Property_value->getPropertyId(),'page'=>$page]));
             }
         }
 
         return $this->render('ShopStoreBundle:Property:editPropertyValues.html.twig', [
-            'form' => $form->createView(),'id'=>$id_value_Property,
+            'form' => $form->createView(),'id'=>$id_value_Property,'page'=>$page
         ]);
     }
 
@@ -174,21 +177,23 @@ class PropertyController extends Controller
         $em = $this->getDoctrine()->getManager();
         $Property_value = $em->getRepository('ShopStoreBundle:PropertyValues')->find($id);
         $position = $Property_value->getPosition();
+        $property_id = $Property_value->getPropertyId();
+ //       ld($Property_value);
         $Property_value_up = $em->getRepository('ShopStoreBundle:PropertyValues')->
-            findUpPropertyValues($id,$position);
+            findUpPropertyValues($id,$property_id,$position);
         if( is_object($Property_value_up) )
         {
             $Property_value->setPosition($position-1);
             $Property_value_up->setPosition($position);
- //           $em->persist($Property_value_up);
+            $em->persist($Property_value_up);
             $em->flush($Property_value_up);
         }
         else{
             $Property_value->setPosition(1);
         }
-       // exit;
- //       $em->persist($Property_value);
+        $em->persist($Property_value);
         $em->flush($Property_value);
+           //ld($Property_value);           ld('aaaa');         ld($Property_value_up);        exit;
         return $this->redirect($this->generateUrl('shop_store_PropertyValues',
             ['id_property'=>$Property_value->getPropertyId(),'page'=>$page]));
     }
@@ -198,8 +203,9 @@ class PropertyController extends Controller
         $em = $this->getDoctrine()->getManager();
         $Property_value = $em->getRepository('ShopStoreBundle:PropertyValues')->find($id);
         $position = $Property_value->getPosition();
+        $property_id = $Property_value->getPropertyId();
         $Property_value_down = $em->getRepository('ShopStoreBundle:PropertyValues')->
-            findDownPropertyValues($id,$position);
+            findDownPropertyValues($id,$property_id,$position);
         if( is_object($Property_value_down) )
         {
             $Property_value->setPosition($position+1);

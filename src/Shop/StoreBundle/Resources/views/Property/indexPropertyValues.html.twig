@@ -23,16 +23,17 @@
         </thead>
         <tbody>
       {#  {% for value in Property_values %} #}
+      {#        <td>{{ Property_values[i].Property.name }}</td>  #}
         {% set max_i = Property_values|length %}
         {% if max_i>0 %}
             {% for i in 0..max_i-1 %}
                 <tr>
                    <td>{{ Property_values[i].id }}</td>
-                   <td>{{ Property_values[i].Property.name }}</td>
+                   <td>{{ Property_values[i].name }}</td>
                    <td>{{ Property_values[i].value }}</td>
                    <td>{{ Property_values[i].position }}</td>
                    <td>
-                        <a href="{{ path('shop_store_PropertyValues_edit', {'id_value_Property': Property_values[i].id}) }}">
+                        <a href="{{ path('shop_store_PropertyValues_edit', {'id_value_Property': Property_values[i].id,'page': page} ) }}">
                             edit
                         </a>
                    </td>

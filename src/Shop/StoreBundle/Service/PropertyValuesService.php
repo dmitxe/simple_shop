@@ -34,5 +34,14 @@ class PropertyValuesService
         }
         return $res_param;
     }
+    public function getUrlDbal($property_values)
+    {
+        $res_param = array();
+        foreach( $property_values as $value)
+        {
+            $res_param[] = array( $value['id'] );
+        }
+        return $res_param;
+    }
 }
 
