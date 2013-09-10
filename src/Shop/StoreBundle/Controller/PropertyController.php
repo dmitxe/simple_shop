@@ -21,17 +21,38 @@ class PropertyController extends Controller
     {
     }
 
-
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, $page=1)
     {
-        $em = $this->getDoctrine()->getManager();
-        $Property_service=$this->get('shop_store.property');
-        $Propertys =$em->getRepository('ShopStoreBundle:Property')->findAll();
-        return $this->render('ShopStoreBundle:Property:index.html.twig',
-            ['Propertys'=>$Propertys   ]);
+    //    $em = $this->getDoctrine()->getManager();
+   /*     $all_count = $em->getRepository('ShopStoreBundle:Property')->findCountProperty();
+        if( $all_count>0)
+        {
+            $service_route = $this->container->get('router');
+            $pagen_service = $this->get('shop_store.Pagen');
+            $pagen_service->setInterval_page(2);
+            $pagen_service->setItems_per_page(4);
+            $route = 'shop_store_Property';
+            $route_parameters = array( 'page'=>$page );
+            $pager = $pagen_service->myPaginat( $all_count, $route,$route_parameters,$page,$service_route);
+            $page = $pagen_service->getPage();
+            $limit = $pagen_service->getItems_per_page();
+            $offset = ($page-1)*$limit;
+            ld(' limit='.$limit.'  off='.$offset);
+            $Property = $em->getRepository('ShopStoreBundle:Property')->
+                findAllPropertyDBAL($offset,$limit);
+            ld($Property);
+        }
+        else{
+            $param_url = array();
+            $pager = '';
+        }
+*/
+        return $this->render('ShopStoreBundle:Property:index.html.twig'
+//            ['Propertys'=>$Property, 'pager' => $pager, ]
+        );
     }
 
-    public function createAction(Request $request)
+    public function createAction(Request $request, $page)
     {
         $Property = new Property;
         $class='Shop\StoreBundle\Entity\Property';
@@ -56,8 +77,6 @@ class PropertyController extends Controller
      * @param Request $request
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function editAction(Request $request, $id)
     {
@@ -99,14 +118,10 @@ class PropertyController extends Controller
             $pager = $pagen_service->myPaginat( $all_count, $route,$route_parameters,$page,$service_route);
             $page = $pagen_service->getPage();
             $limit = $pagen_service->getItems_per_page();
-//            $offset = ($page-1)*$limit+1;
             $offset = ($page-1)*$limit;
-            ld(' limit='.$limit.'  off='.$offset);
-            $propertyValuesService = $this->get('shop_store.PropertyValues');
             $Property_values = $em->getRepository('ShopStoreBundle:PropertyValues')->
                 findAllPropertyValuesDBAL($id_property,$offset,$limit);
-//            findAllPropertyValues($id_property,$offset,$limit);
-            ld($Property_values);
+            $propertyValuesService = $this->get('shop_store.PropertyValues');
             $param_url = $propertyValuesService->getUrlDbal( $Property_values );
         }
         else{

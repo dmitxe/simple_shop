@@ -2,11 +2,11 @@
 
 {% block admin_content %}
     <a href="{{ path('shop_store_PropertyValues_create', {'id_Property': id_property}) }}">
-        Добавить значение аттрибута
+        Добавить значение свойства
     </a>
     &nbsp;
-    <a href="{{ path('shop_store_Property') }}">
-        Таблица аттрибутов
+    <a href="{{ path('shop_store_Property',{'page': 1}) }}">
+        Таблица свойств
     </a>
 
     <table class="table table-striped">

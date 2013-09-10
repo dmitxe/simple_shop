@@ -12,21 +12,14 @@ namespace Shop\StoreBundle\Service;
 
 class PropertyService
 {
-    /**
-     * @var integer
-     */
-    protected $type_field;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
+    public function getUrlDbal($property)
     {
-        $this->type_field     = array(0=>'integer',1=>'float',2=>'string');
-    }
-
-    public function getType_field()
-    {
-        return $this->type_field;
+        $res_param = array();
+        foreach( $property as $value)
+        {
+            $res_param[] = array( $value['id'] );
+        }
+        return $res_param;
     }
 }
+

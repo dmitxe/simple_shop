@@ -11,8 +11,10 @@ shop_store_Property_edit:
     requirements:
       id: \d+
 shop_store_Property:
-    path:  /property/
+    path:  /property/{spage}
     defaults: { _controller: ShopStoreBundle:Property:index }
+    requirements:
+      spage: \d+
 
 shop_store_PropertyValues:
     path:  /property_values/{id_property}/{page}

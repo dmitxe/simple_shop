@@ -8,27 +8,12 @@
  */
 
 namespace Shop\StoreBundle\Service;
-use Doctrine\ORM\EntityRepository;
+
+Doctrine\ORM\EntityRepository;
 
 
-class DbalService
+class DbalService extends Controller
 {
-    /**
-     * @var integer
-     */
-    protected $conn;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->type_field     = array(0=>'integer',1=>'float',2=>'string');
-    }
-
-    public function getType_field()
-    {
-    }
 
 
 }
