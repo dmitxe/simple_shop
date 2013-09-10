@@ -99,9 +99,11 @@ class PropertyController extends Controller
             $page = $pagen_service->getPage();
             $limit = $pagen_service->getItems_per_page();
             $offset = ($page-1)*$limit+1;
+            ld(' limit='.$limit.'  off='.$offset);
             $propertyValuesService = $this->get('shop_store.PropertyValues');
             $Property_values = $em->getRepository('ShopStoreBundle:PropertyValues')->
                 findAllPropertyValues($id_property,$offset,$limit);
+            ld($Property_values);
             $param_url = $propertyValuesService->getUrl( $Property_values );
         }
         else{
@@ -114,6 +116,7 @@ class PropertyController extends Controller
                 'id_property' => $id_property,
                 'param_url' => $param_url,
                 'pager' => $pager,
+                'page' => $page,
             ]);
     }
 
@@ -166,7 +169,7 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function upPropertyValuesAction(Request $request,$id)
+    public function upPropertyValuesAction(Request $request,$id,$page)
     {
         $em = $this->getDoctrine()->getManager();
         $Property_value = $em->getRepository('ShopStoreBundle:PropertyValues')->find($id);
@@ -187,10 +190,10 @@ class PropertyController extends Controller
  //       $em->persist($Property_value);
         $em->flush($Property_value);
         return $this->redirect($this->generateUrl('shop_store_PropertyValues',
-            ['id_property'=>$Property_value->getPropertyId()]));
+            ['id_property'=>$Property_value->getPropertyId(),'page'=>$page]));
     }
 
-    public function downPropertyValuesAction(Request $request,$id)
+    public function downPropertyValuesAction(Request $request,$id,$page)
     {
         $em = $this->getDoctrine()->getManager();
         $Property_value = $em->getRepository('ShopStoreBundle:PropertyValues')->find($id);
@@ -205,7 +208,7 @@ class PropertyController extends Controller
             $em->flush($Property_value);
         }
         return $this->redirect($this->generateUrl('shop_store_PropertyValues',
-            ['id_property'=>$Property_value->getPropertyId()]));
+            ['id_property'=>$Property_value->getPropertyId(),'page'=>$page]));
     }
 }
 

@@ -15,9 +15,10 @@ class PropertyValuesRepository extends EntityRepository
         $q = " SELECT ta  FROM ShopStoreBundle:PropertyValues AS ta";
         $q .= " join ShopStoreBundle:Property AS a where ta.property_id=" . $id_Property;
         $q .= " order by ta.property_id, ta.position";
+       $limit=5;
         return $this->getEntityManager()->createQuery($q)
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
+       //     ->setFirstResult($offset)
+            ->setMaxResults(6)
             ->getResult();
     }
     /**

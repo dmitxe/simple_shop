@@ -34,13 +34,15 @@ shop_store_PropertyValues_edit:
       id_value_Property: \d+
 
 shop_store_PropertyValues_up:
-    path:  /PropertyValues/up/{id}
+    path:  /PropertyValues/up/{id}/{page}
     defaults: { _controller: ShopStoreBundle:Property:upPropertyValues }
     requirements:
       id: \d+
+      page: \d+
 
 shop_store_PropertyValues_down:
-    path:  /PropertyValues/down/{id}
+    path:  /PropertyValues/down/{id}/{page}
     defaults: { _controller: ShopStoreBundle:Property:downPropertyValues }
     requirements:
       id: \d+
+      page: \d+
