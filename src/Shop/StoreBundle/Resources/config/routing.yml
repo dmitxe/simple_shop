@@ -15,10 +15,11 @@ shop_store_Property:
     defaults: { _controller: ShopStoreBundle:Property:index }
 
 shop_store_PropertyValues:
-    path:  /property_values/{id_property}
+    path:  /property_values/{id_property}/{page}
     defaults: { _controller: ShopStoreBundle:Property:indexPropertyValues }
     requirements:
       id_property: \d+
+      page: \d+
 
 shop_store_PropertyValues_create:
     path:  /PropertyValues/create/{id_Property}
@@ -33,15 +34,13 @@ shop_store_PropertyValues_edit:
       id_value_Property: \d+
 
 shop_store_PropertyValues_up:
-    path:  /PropertyValues/up/{id}/{id_old}
+    path:  /PropertyValues/up/{id}
     defaults: { _controller: ShopStoreBundle:Property:upPropertyValues }
     requirements:
       id: \d+
-      id_old: \d+
 
 shop_store_PropertyValues_down:
-    path:  /PropertyValues/down/{id}/{id_old}
+    path:  /PropertyValues/down/{id}
     defaults: { _controller: ShopStoreBundle:Property:downPropertyValues }
     requirements:
       id: \d+
-      id_old: \d+

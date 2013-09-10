@@ -37,14 +37,12 @@
                         </a>
                    </td>
                     <td>
-                        <a href="{{ path('shop_store_PropertyValues_up',
-                        {'id': param_url_up[i][0],'id_old': param_url_up[i][1]}) }}">
+                        <a href="{{ path('shop_store_PropertyValues_up',{'id': param_url[i][0]}) }}">
                             up
                         </a>
                     </td>
                     <td>
-                        <a href="{{ path('shop_store_PropertyValues_down',
-                        {'id': param_url_down[i][0],'id_old': param_url_down[i][1]}) }}">
+                        <a href="{{ path('shop_store_PropertyValues_down',{'id': param_url[i][0]}) }}">
                             down
                         </a>
                     </td>
@@ -53,4 +51,5 @@
         {% endif %}
         </tbody>
     </table>
+    {{ pager|raw }}
 {% endblock admin_content %}

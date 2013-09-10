@@ -1,6 +1,7 @@
 parameters:
     shop_store.property.class: Shop\StoreBundle\Service\PropertyService
-    shop_store.property.class: Shop\StoreBundle\Service\PropertyValuesService
+    shop_store.propertyValues.class: Shop\StoreBundle\Service\PropertyValuesService
+    shop_store.pagen.class: Shop\StoreBundle\Service\PagenService
 
 services:
     shop_store.property:
@@ -8,6 +9,10 @@ services:
         arguments: []
 
     shop_store.PropertyValues:
-        class: %shop_store.property.class%
+        class: %shop_store.propertyValues.class%
+        arguments: []
+
+    shop_store.Pagen:
+        class: %shop_store.pagen.class%
         arguments: []
 

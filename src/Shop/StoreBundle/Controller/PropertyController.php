@@ -25,7 +25,7 @@ class PropertyController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $Property_service=$this->get('shop_store.Property');
+        $Property_service=$this->get('shop_store.property');
         $Propertys =$em->getRepository('ShopStoreBundle:Property')->findAll();
         return $this->render('ShopStoreBundle:Property:index.html.twig',
             ['Propertys'=>$Propertys   ]);
@@ -82,28 +82,38 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function indexPropertyValuesAction(Request $request,$id_property)
+    public function indexPropertyValuesAction(Request $request,$id_property,$page=1)
     {
         $em = $this->getDoctrine()->getManager();
-        $Property_values =$em->getRepository('ShopStoreBundle:PropertyValues')->
-            findAllPropertyValues($id_property);
-//        ld($Property_values);
-        if( count($Property_values)>0)
+        $all_count = $em->getRepository('ShopStoreBundle:PropertyValues')->
+            findCountPropertyValues($id_property);
+
+        if( $all_count>0)
         {
+            $service_route = $this->container->get('router');
+            $pagen_service = $this->get('shop_store.Pagen');
+            $pagen_service->setInterval_page(2);
+            $route = 'shop_store_PropertyValues';
+            $route_parameters = array( 'id_property'=>$id_property, 'page'=>$page );
+            $pager = $pagen_service->myPaginat( $all_count, $route,$route_parameters,$page,$service_route);
+            $page = $pagen_service->getPage();
+            $limit = $pagen_service->getItems_per_page();
+            $offset = ($page-1)*$limit+1;
             $propertyValuesService = $this->get('shop_store.PropertyValues');
-            $param_url_up = $propertyValuesService->getUrlUp( $Property_values );
-            $param_url_down = $propertyValuesService->getUrlDown( $Property_values );
+            $Property_values = $em->getRepository('ShopStoreBundle:PropertyValues')->
+                findAllPropertyValues($id_property,$offset,$limit);
+            $param_url = $propertyValuesService->getUrl( $Property_values );
         }
         else{
-            $param_url_up = array();
-            $param_url_down = array();
+            $param_url = array();
+            $pager = '';
         }
-//        ld($param_url_down);
         return $this->render('ShopStoreBundle:Property:indexPropertyValues.html.twig',
-            [    'Property_values' => $Property_values,
-                 'id_property' => $id_property,
-                'param_url_up' => $param_url_up,
-                'param_url_down' => $param_url_down,
+            [
+                'Property_values' => $Property_values,
+                'id_property' => $id_property,
+                'param_url' => $param_url,
+                'pager' => $pager,
             ]);
     }
 
@@ -125,7 +135,8 @@ class PropertyController extends Controller
                 $table_Property->setProperty($Property);
                 $em->persist($table_Property);
                 $em->flush($table_Property);
-                return $this->redirect($this->generateUrl('shop_store_PropertyValues',['id_property'=>$id_Property]));
+                return $this->redirect($this->generateUrl('shop_store_PropertyValues',
+                    ['id_property'=>$id_Property, 'page'=>1 ]));
             }
         }
         return $this->render('ShopStoreBundle:Property:createPropertyValues.html.twig', [
@@ -146,7 +157,7 @@ class PropertyController extends Controller
             if ($form->isValid()) {
                 $em->flush($Property_value);
                 return $this->redirect($this->generateUrl('shop_store_PropertyValues',
-                    ['id_property'=>$Property_value->getPropertyId()]));
+                    ['id_property'=>$Property_value->getPropertyId(),'page'=>1]));
             }
         }
 
@@ -155,46 +166,44 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function upPropertyValuesAction(Request $request,$id,$id_old)
+    public function upPropertyValuesAction(Request $request,$id)
     {
         $em = $this->getDoctrine()->getManager();
         $Property_value = $em->getRepository('ShopStoreBundle:PropertyValues')->find($id);
-        if( $id_old == 0 )
-            $Property_value->setPosition(1);
-        else{
-            $position = $Property_value->getPosition();
-            $Property_value_old = $em->getRepository('ShopStoreBundle:PropertyValues')->find($id_old);
+        $position = $Property_value->getPosition();
+        $Property_value_up = $em->getRepository('ShopStoreBundle:PropertyValues')->
+            findUpPropertyValues($id,$position);
+        if( is_object($Property_value_up) )
+        {
             $Property_value->setPosition($position-1);
-            $Property_value_old->setPosition($position);
-            $em->persist($Property_value_old);
-            $em->flush($Property_value_old);
+            $Property_value_up->setPosition($position);
+ //           $em->persist($Property_value_up);
+            $em->flush($Property_value_up);
         }
-        $em->persist($Property_value);
+        else{
+            $Property_value->setPosition(1);
+        }
+       // exit;
+ //       $em->persist($Property_value);
         $em->flush($Property_value);
         return $this->redirect($this->generateUrl('shop_store_PropertyValues',
             ['id_property'=>$Property_value->getPropertyId()]));
     }
 
-    public function downPropertyValuesAction(Request $request,$id,$id_old)
+    public function downPropertyValuesAction(Request $request,$id)
     {
         $em = $this->getDoctrine()->getManager();
         $Property_value = $em->getRepository('ShopStoreBundle:PropertyValues')->find($id);
-        if( $id_old == 0 )
+        $position = $Property_value->getPosition();
+        $Property_value_down = $em->getRepository('ShopStoreBundle:PropertyValues')->
+            findDownPropertyValues($id,$position);
+        if( is_object($Property_value_down) )
         {
-            $count_Property_values = (int) $em->getRepository('ShopStoreBundle:PropertyValues')->
-                findCountPropertyValues($Property_value->getPropertyId());
-            $Property_value->setPosition($count_Property_values);
+            $Property_value->setPosition($position+1);
+            $Property_value_down->setPosition($position);
+            $em->flush($Property_value_down);
+            $em->flush($Property_value);
         }
-        else{
-            $Property_value_old = $em->getRepository('ShopStoreBundle:PropertyValues')->find($id_old);
-            $position = $Property_value_old->getPosition();
-            $Property_value->setPosition($position);
-            $Property_value_old->setPosition($position-1);
-            $em->persist($Property_value_old);
-            $em->flush($Property_value_old);
-        }
-        $em->persist($Property_value);
-        $em->flush($Property_value);
         return $this->redirect($this->generateUrl('shop_store_PropertyValues',
             ['id_property'=>$Property_value->getPropertyId()]));
     }
