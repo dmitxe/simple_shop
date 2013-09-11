@@ -11,10 +11,6 @@ shop_store_property_edit:
     requirements:
       id: \d+
 
-#shop_store_property:
-#    path: /property/
-#    defaults: { _controller: ShopStoreBundle:property:index }
-
 shop_store_property:
     path:  /property/{page}/
     defaults: { _controller: ShopStoreBundle:property:index }
