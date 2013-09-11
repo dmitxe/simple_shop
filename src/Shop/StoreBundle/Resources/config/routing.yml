@@ -2,50 +2,53 @@ shop_store_admin:
     path:  /
     defaults: { _controller: ShopStoreBundle:Store:index }
 
-shop_store_Property_create:
-    path:  /Property/create/
-    defaults: { _controller: ShopStoreBundle:Property:create }
-shop_store_Property_edit:
-    path:  /Property/edit/{id}
-    defaults: { _controller: ShopStoreBundle:Property:edit }
+shop_store_property_create:
+    path:  /property/create/
+    defaults: { _controller: ShopStoreBundle:property:create }
+shop_store_property_edit:
+    path:  /property/edit/{id}
+    defaults: { _controller: ShopStoreBundle:property:edit }
     requirements:
       id: \d+
-shop_store_Property:
-    path:  /property/{spage}
-    defaults: { _controller: ShopStoreBundle:Property:index }
-    requirements:
-      spage: \d+
 
-shop_store_PropertyValues:
+#shop_store_property:
+#    path: /property/
+#    defaults: { _controller: ShopStoreBundle:property:index }
+
+shop_store_property:
+    path:  /property/{page}/
+    defaults: { _controller: ShopStoreBundle:property:index }
+
+shop_store_propertyValues:
     path:  /property_values/{id_property}/{page}
-    defaults: { _controller: ShopStoreBundle:Property:indexPropertyValues }
+    defaults: { _controller: ShopStoreBundle:property:indexpropertyValues }
     requirements:
       id_property: \d+
       page: \d+
 
-shop_store_PropertyValues_create:
-    path:  /PropertyValues/create/{id_Property}
-    defaults: { _controller: ShopStoreBundle:Property:createPropertyValues }
+shop_store_propertyValues_create:
+    path:  /propertyValues/create/{id_property}
+    defaults: { _controller: ShopStoreBundle:property:createpropertyValues }
     requirements:
-      id_Property: \d+
+      id_property: \d+
 
-shop_store_PropertyValues_edit:
-    path:  /PropertyValues/edit/{id_value_Property}/{page}
-    defaults: { _controller: ShopStoreBundle:Property:editPropertyValues }
+shop_store_propertyValues_edit:
+    path:  /propertyValues/edit/{id_value_property}/{page}
+    defaults: { _controller: ShopStoreBundle:property:editpropertyValues }
     requirements:
-      id_value_Property: \d+
+      id_value_property: \d+
       page: \d+
 
-shop_store_PropertyValues_up:
-    path:  /PropertyValues/up/{id}/{page}
-    defaults: { _controller: ShopStoreBundle:Property:upPropertyValues }
+shop_store_propertyValues_up:
+    path:  /propertyValues/up/{id}/{page}
+    defaults: { _controller: ShopStoreBundle:property:uppropertyValues }
     requirements:
       id: \d+
       page: \d+
 
-shop_store_PropertyValues_down:
-    path:  /PropertyValues/down/{id}/{page}
-    defaults: { _controller: ShopStoreBundle:Property:downPropertyValues }
+shop_store_propertyValues_down:
+    path:  /propertyValues/down/{id}/{page}
+    defaults: { _controller: ShopStoreBundle:property:downpropertyValues }
     requirements:
       id: \d+
       page: \d+

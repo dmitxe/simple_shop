@@ -19,7 +19,9 @@ class AdminMenu extends ContainerAware
         $menu->setChildrenAttribute('class', isset($options['class']) ? $options['class'] : 'nav nav-tabs');
 
         $menu->addChild('Общие',     ['route' => 'shop_store_admin']);
-        $menu->addChild('Свойства',     ['route' => 'shop_store_Property']);
+//        $menu->addChild('Свойства',  ['route' => $this->container->get('router')->
+//            generate('shop_store_property', array('page' => 1))]);
+        $menu->addChild('Свойства',  ['route' => 'shop_store_property', 'routeParameters' => ['page' => 1]]);
 
         return $menu;
     }

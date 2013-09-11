@@ -1,11 +1,11 @@
 {% extends 'ShopStoreBundle::layout.html.twig' %}
 
 {% block admin_content %}
-    <a href="{{ path('shop_store_PropertyValues_create', {'id_Property': id_property}) }}">
+    <a href="{{ path('shop_store_propertyValues_create', {'id_property': id_property} ) }}">
         Добавить значение свойства
     </a>
     &nbsp;
-    <a href="{{ path('shop_store_Property',{'page': 1}) }}">
+    <a href="{{ path('shop_store_property',{'page': 1}) }}">
         Таблица свойств
     </a>
 
@@ -22,28 +22,28 @@
         </tr>
         </thead>
         <tbody>
-      {#  {% for value in Property_values %} #}
-      {#        <td>{{ Property_values[i].Property.name }}</td>  #}
-        {% set max_i = Property_values|length %}
+      {#  {% for value in property_values %} #}
+      {#        <td>{{ property_values[i].property.name }}</td>  #}
+        {% set max_i = property_values|length %}
         {% if max_i>0 %}
             {% for i in 0..max_i-1 %}
                 <tr>
-                   <td>{{ Property_values[i].id }}</td>
-                   <td>{{ Property_values[i].name }}</td>
-                   <td>{{ Property_values[i].value }}</td>
-                   <td>{{ Property_values[i].position }}</td>
+                   <td>{{ property_values[i].id }}</td>
+                   <td>{{ property_values[i].name }}</td>
+                   <td>{{ property_values[i].value }}</td>
+                   <td>{{ property_values[i].position }}</td>
                    <td>
-                        <a href="{{ path('shop_store_PropertyValues_edit', {'id_value_Property': Property_values[i].id,'page': page} ) }}">
+                        <a href="{{ path('shop_store_propertyValues_edit', {'id_value_property': property_values[i].id,'page': page} ) }}">
                             edit
                         </a>
                    </td>
                     <td>
-                        <a href="{{ path('shop_store_PropertyValues_up',{'id': param_url[i][0],'page': page}) }}">
+                        <a href="{{ path('shop_store_propertyValues_up',{'id': param_url[i][0],'page': page}) }}">
                             up
                         </a>
                     </td>
                     <td>
-                        <a href="{{ path('shop_store_PropertyValues_down',{'id': param_url[i][0],'page': page}) }}">
+                        <a href="{{ path('shop_store_propertyValues_down',{'id': param_url[i][0],'page': page}) }}">
                             down
                         </a>
                     </td>

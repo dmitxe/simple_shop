@@ -1,7 +1,7 @@
 {% extends 'ShopStoreBundle::layout.html.twig' %}
 
 {% block admin_content %}
- {#   <a href="{{ path('shop_store_Property_create') }}">
+    <a href="{{ path('shop_store_property_create') }}">
         Добавить свойство
     </a>
     <table class="table table-striped">
@@ -14,28 +14,27 @@
         </tr>
         </thead>
         <tbody>
-        {% set max_i = Propertys|length %}
+        {% set max_i = propertys|length %}
         {% if max_i>0 %}
         {% endif %}
         </tbody>
-    </table>
-#}
-
-{% endblock admin_content %}
-      {#   {% for i in 0..max_i-1 %}
+        {% for i in 0..max_i-1 %}
             <tr>
-                <td>{{ Propertys[i].id }}</td>
-                <td>{{ Propertys[i].name }}</td>
+                <td>{{ propertys[i].id }}</td>
+                <td>{{ propertys[i].name }}</td>
                 <td>
-                    <a href="{{ path('shop_store_Property_edit', {'id': Propertys[i].id}) }}">
+                    <a href="{{ path('shop_store_property_edit', {'id': propertys[i].id}) }}">
                         edit
                     </a>
                 </td>
                 <td>
-                    <a href="{{ path('shop_store_PropertyValues', {'id_property': Propertys[i].id,'page' : 1 } ) }}">
+                    <a href="{{ path('shop_store_propertyValues', {'id_property': propertys[i].id,'page' : 1 } ) }}">
                         value
                     </a>
                 </td>
             </tr>
-         {% endfor %}
-            #}
+        {% endfor %}
+    </table>
+    {{ pager|raw }}
+{% endblock admin_content %}
+

@@ -23,7 +23,7 @@ class PropertyRepository extends EntityRepository
      */
     public function findCountProperty()
     {
-        $q = " SELECT  COUNT(p.id) as kol  FROM ShopStoreBundle:PropertyValues AS p";
+        $q = " SELECT  COUNT(p.id) as kol  FROM ShopStoreBundle:Property AS p";
         return $this->getEntityManager()->createQuery($q)->getSingleScalarResult();
     }
 

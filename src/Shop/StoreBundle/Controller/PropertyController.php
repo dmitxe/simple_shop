@@ -21,17 +21,18 @@ class PropertyController extends Controller
     {
     }
 
-    public function indexAction(Request $request, $page=1)
+    public function indexAction($page=1)
     {
-    //    $em = $this->getDoctrine()->getManager();
-   /*     $all_count = $em->getRepository('ShopStoreBundle:Property')->findCountProperty();
+        $em = $this->getDoctrine()->getManager();
+        $all_count = $em->getRepository('ShopStoreBundle:Property')->findCountProperty();
         if( $all_count>0)
         {
+         ld(' all='.$all_count.'  page='.$page);
             $service_route = $this->container->get('router');
             $pagen_service = $this->get('shop_store.Pagen');
             $pagen_service->setInterval_page(2);
-            $pagen_service->setItems_per_page(4);
-            $route = 'shop_store_Property';
+            $pagen_service->setItems_per_page(2);
+            $route = 'shop_store_property';
             $route_parameters = array( 'page'=>$page );
             $pager = $pagen_service->myPaginat( $all_count, $route,$route_parameters,$page,$service_route);
             $page = $pagen_service->getPage();
@@ -46,13 +47,12 @@ class PropertyController extends Controller
             $param_url = array();
             $pager = '';
         }
-*/
-        return $this->render('ShopStoreBundle:Property:index.html.twig'
-//            ['Propertys'=>$Property, 'pager' => $pager, ]
+        return $this->render('ShopStoreBundle:Property:index.html.twig',
+            ['propertys'=>$Property, 'pager' => $pager, ]
         );
     }
 
-    public function createAction(Request $request, $page)
+    public function createAction(Request $request)
     {
         $Property = new Property;
         $class='Shop\StoreBundle\Entity\Property';
@@ -64,10 +64,9 @@ class PropertyController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($Property);
                 $em->flush($Property);
-                return $this->redirect($this->generateUrl('shop_store_Property'));
+                return $this->redirect($this->generateUrl('shop_store_property',['page'=>1 ]));
             }
         }
-        $Property->setTypeValue(0);
         return $this->render('ShopStoreBundle:Property:createProperty.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -92,7 +91,7 @@ class PropertyController extends Controller
             if ($form->isValid()) {
                 $em->flush($Property);
 
-                return $this->redirect($this->generateUrl('shop_store_Property'));
+                return $this->redirect($this->generateUrl('shop_store_property', ['page'=>1 ]));
             }
         }
 
@@ -101,7 +100,7 @@ class PropertyController extends Controller
         ]);
     }
 
-    public function indexPropertyValuesAction(Request $request,$id_property,$page=1)
+    public function indexPropertyValuesAction($id_property,$page=1)
     {
         $em = $this->getDoctrine()->getManager();
         $all_count = $em->getRepository('ShopStoreBundle:PropertyValues')->
@@ -113,7 +112,7 @@ class PropertyController extends Controller
             $pagen_service = $this->get('shop_store.Pagen');
             $pagen_service->setInterval_page(2);
             $pagen_service->setItems_per_page(4);
-            $route = 'shop_store_PropertyValues';
+            $route = 'shop_store_propertyValues';
             $route_parameters = array( 'id_property'=>$id_property, 'page'=>$page );
             $pager = $pagen_service->myPaginat( $all_count, $route,$route_parameters,$page,$service_route);
             $page = $pagen_service->getPage();
@@ -126,11 +125,12 @@ class PropertyController extends Controller
         }
         else{
             $param_url = array();
+            $Property_values = array();
             $pager = '';
         }
         return $this->render('ShopStoreBundle:Property:indexPropertyValues.html.twig',
             [
-                'Property_values' => $Property_values,
+                'property_values' => $Property_values,
                 'id_property' => $id_property,
                 'param_url' => $param_url,
                 'pager' => $pager,
@@ -138,7 +138,7 @@ class PropertyController extends Controller
             ]);
     }
 
-    public function createPropertyValuesAction(Request $request,$id_Property)
+    public function createPropertyValuesAction(Request $request,$id_property)
     {
         $table_Property = new PropertyValues;
         $class='Shop\StoreBundle\Entity\PropertyValues';
@@ -149,19 +149,19 @@ class PropertyController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $count_Property_values = (int) $em->getRepository('ShopStoreBundle:PropertyValues')->
-                    findCountPropertyValues($id_Property);
+                    findCountPropertyValues($id_property);
             //    $table_Property->setPropertyId((int) $id_Property);
                 $table_Property->setPosition($count_Property_values+1);
-                $Property=$em->getRepository('ShopStoreBundle:Property')->find($id_Property);
+                $Property=$em->getRepository('ShopStoreBundle:Property')->find($id_property);
                 $table_Property->setProperty($Property);
                 $em->persist($table_Property);
                 $em->flush($table_Property);
-                return $this->redirect($this->generateUrl('shop_store_PropertyValues',
-                    ['id_property'=>$id_Property, 'page'=>1 ]));
+                return $this->redirect($this->generateUrl('shop_store_propertyValues',
+                    ['id_property'=>$id_property, 'page'=>1 ]));
             }
         }
         return $this->render('ShopStoreBundle:Property:createPropertyValues.html.twig', [
-            'form' => $form->createView(),'id_property'=>$id_Property,
+            'form' => $form->createView(),'id_property'=>$id_property,
         ]);
     }
 
@@ -177,7 +177,7 @@ class PropertyController extends Controller
 
             if ($form->isValid()) {
                 $em->flush($Property_value);
-                return $this->redirect($this->generateUrl('shop_store_PropertyValues',
+                return $this->redirect($this->generateUrl('shop_store_propertyValues',
                     ['id_property'=>$Property_value->getPropertyId(),'page'=>$page]));
             }
         }
@@ -209,7 +209,7 @@ class PropertyController extends Controller
         $em->persist($Property_value);
         $em->flush($Property_value);
            //ld($Property_value);           ld('aaaa');         ld($Property_value_up);        exit;
-        return $this->redirect($this->generateUrl('shop_store_PropertyValues',
+        return $this->redirect($this->generateUrl('shop_store_propertyValues',
             ['id_property'=>$Property_value->getPropertyId(),'page'=>$page]));
     }
 
@@ -228,7 +228,7 @@ class PropertyController extends Controller
             $em->flush($Property_value_down);
             $em->flush($Property_value);
         }
-        return $this->redirect($this->generateUrl('shop_store_PropertyValues',
+        return $this->redirect($this->generateUrl('shop_store_propertyValues',
             ['id_property'=>$Property_value->getPropertyId(),'page'=>$page]));
     }
 }
